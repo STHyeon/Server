@@ -58,7 +58,7 @@ def logout(request):
 
 def start(request):
     return render(request, 'html/start.html', {})
-
+'''
 def post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -69,4 +69,8 @@ def post(request):
             return redirect('main')
     else:
         form = PostForm()
-    return render(request, 'html/post1.html',{'form': form})
+    return render(request, 'html/post.html',{'form': form})'''
+
+def post(request):
+    form = PostForm()
+    return render(request, 'html/post.html', {'form':form})
