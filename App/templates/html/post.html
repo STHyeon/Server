@@ -1,0 +1,21 @@
+{% extends 'html/base.html' %}
+{% load staticfiles %}
+{% block stylesheet %}{% static "css/post.css" %}{% endblock %}
+{% block title %}글작성{% endblock %}
+
+{% block content %}
+<form method="POST">
+        {% csrf_token %}
+        {% for field in PostForm %}
+          <div class="form-group">
+            {{ field }}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button id="bbbt" type="submit">글길 올리기</button>
+</form>
+{% endblock %}
