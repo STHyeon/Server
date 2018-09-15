@@ -22,11 +22,11 @@ body {
   #il {
     position: absolute;
     background-image: url('../img/background3.png');
-      background-repeat: no-repeat;
-    width: 1536px;
-    height: 758px;
-      background-position: center;
-      background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
   }
   
   #log {

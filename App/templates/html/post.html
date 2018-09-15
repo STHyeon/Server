@@ -4,18 +4,34 @@
 {% block title %}글작성{% endblock %}
 
 {% block content %}
-<form method="POST">
-        {% csrf_token %}
-        {% for field in PostForm %}
-          <div class="form-group">
-            {{ field }}
-            {% if field.errors %}
-              {% for error in field.errors %}
-                <span class="help-block">{{ error }}</span>
-              {% endfor %}
-            {% endif %}
+    <div class="container">
+      <div id="black" class="center-block">
+        <div id="box">
+          <div id="box1">
+              <div id="fo">
+                <input id="iam" type="file"accept="image/gif, image/jpeg, image/png">
+              </div>
+              <div class="center-block" id="im">
+                <img class="img-responsive center-block" class="plu" id="vie"></div>
+            </div>
+            <div id="bbt" class="center-block">
+                <form method="POST">
+              <button id="bbbt" type="submit">글길 올리기</button>
+            </div>
           </div>
-        {% endfor %}
-        <button id="bbbt" type="submit">글길 올리기</button>
-</form>
-{% endblock %}
+          <div id="box2" class="center-block">
+            <div id="box3">
+              <div class="center-block" class="in">
+                  {% csrf_token %}
+                  {% for field in form %}
+                    <div class="form-group">
+                      {{ field }}
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
+          </div>
+      </form>
+      </div>
+    </div>
+    {% endblock %}

@@ -58,19 +58,14 @@ def logout(request):
 
 def start(request):
     return render(request, 'html/start.html', {})
-'''
+
 def post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
             post.save()
             return redirect('main')
     else:
         form = PostForm()
-    return render(request, 'html/post.html',{'form': form})'''
-
-def post(request):
-    form = PostForm()
-    return render(request, 'html/post.html', {'form':form})
+        return render(request, 'html/post.html',{'form': form})

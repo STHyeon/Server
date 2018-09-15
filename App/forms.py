@@ -90,6 +90,7 @@ class PostForm(forms.ModelForm):
         'content': forms.Textarea( attrs={
             'class': 'form-control',
             'class': 'inl',
+            'id': 'inl1',
             'placeholder': "최대140글자까지만 입력해주세요",
             'rows': 8,
             'cols':66,
