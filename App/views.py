@@ -69,4 +69,4 @@ def post(request):
             return redirect('main')
     else:
         form = PostForm()
-    return render(request, 'html/post.html',{'form': form})
+    return render(request, 'html/post1.html',{'form': form})
