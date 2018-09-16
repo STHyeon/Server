@@ -69,3 +69,8 @@ def post(request):
     else:
         form = PostForm()
         return render(request, 'html/post.html',{'form': form})
+
+def detail(request):
+    post = Post.objects.all()
+    return render(request, 'html/list.html',{'post': post})
+

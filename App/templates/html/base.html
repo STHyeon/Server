@@ -14,6 +14,7 @@
   <body>
     <div>{% include "html/nav.html" %}</div>
     {% block content %}
+    <script src="{% block scripts %}{% endblock %}"></script>
     {% endblock %}
   </body>
 </html>

@@ -4,6 +4,7 @@
 {% block title %}글작성{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
     <div class="container">
       <div id="black" class="center-block">
         <div id="box">
@@ -34,4 +35,11 @@
       </form>
       </div>
     </div>
+    {% else %}
+    <!--
+      <script src="../../static/js/alret.js"></script>
+      {% block scripts %}{% static 'js/alret.js' %}{% endblock %}
+    -->
+      <script src="{% static 'js/alret.js' %}"></script>
+    {% endif %}
     {% endblock %}

@@ -10,7 +10,7 @@
         <div class="center-block" id="box">
             <input type="text">
             {% if user.is_authenticated %}
-              <a href="{% url 'post' %}"><button>글쓰기</button></a>
+              <a href="{% url 'post' %}"><button class="button">글쓰기</button></a>
             {% else %}
             {% endif %}
           </div>
