@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
+    {% block script %}<script></script>{% endblock %}
   </head>
   <body>
     <div>{% include "html/nav.html" %}</div>
     {% block content %}
-    <script src="{% block scripts %}{% endblock %}"></script>
     {% endblock %}
   </body>
 </html>

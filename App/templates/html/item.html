@@ -16,11 +16,11 @@
 <!-- 내용 -->
 {% block content %}{% endblock %}
 
+<!-- js -->
+{% block script %}<script></script>{% endblock %}
+
 <!-- img -->
 {% static 'img/background.jpg' %}
-
-<!-- js -->
-<script src="{% static 'js/alret.js' %}"></script>
 
 <!-- 링크 -->
 {% url 'main' %}
