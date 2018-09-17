@@ -23,20 +23,41 @@ input {
 #box {
   position: relative;
   top: 50%;
-  width: 300px;
+  width: 350px;
   height: 200px;
 }
 
 .button {
   width: 86px;
-  height: 76px;
-  border: 1px solid black;
-  border-radius: 25px;
-  margin: auto;
+  height: 43px;
+  color: black;
+  border: 1px solid #bcbcbc;
+  border-radius: 14px;
+  margin-right: 10px;
+  margin-left: 36px;
   display: block;
   float: left;
+  background-color: aquamarine;
 }
 
 .but {
   float: left;
+}
+
+.spac {
+  width: 1px;
+  height: 405px;
+}
+
+.r_sear {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.col-sm-4 {
+  border: 1px solid #bcbcbc;
+}
+
+.g_btu {
+  margin: 10px;
 }

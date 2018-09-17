@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 from django.http import HttpResponse
 
-from .forms import LoginForm, RegisterForm, PostForm, SearchForm
+from .forms import LoginForm, RegisterForm, PostForm
 from .models import Post
 
 def login(request):
@@ -74,14 +74,3 @@ def post(request):
 def detail(request):
     post = Post.objects.all()
     return render(request, 'html/list.html',{'post': post})
-
-def search(request):
-#     form = SearchForm()
-#     def form
-    post = Post.objects.all()
-    sear = request.GET.get('sear', '')
-
-    if sear:
-        post = post.filter(user=sear)
-
-    return render(request, 'html/search.html', {'post':post, 'sear': sear})
