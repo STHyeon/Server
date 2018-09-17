@@ -96,3 +96,6 @@ class PostForm(forms.ModelForm):
             'cols':66,
             }),
         }
+
+class SearchForm(forms.Form):
+    word = forms.CharField(label='s_word')

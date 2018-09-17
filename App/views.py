@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
+from django.http import HttpResponse
 
-from .forms import LoginForm, RegisterForm, PostForm
+from .forms import LoginForm, RegisterForm, PostForm, SearchForm
 from .models import Post
-
-'''
-def post(request):
-    post = Post.objects.prefetch_related('tag').select_related('author__profile').all()
-
-    return render(request,'')'''
 
 def login(request):
     if request.method == 'POST':
@@ -50,7 +45,13 @@ def register(request):
     return render(request, 'html/register.html', context)
 
 def main(request):
-    return render(request, 'html/main.html', {})
+    post = Post.objects.all()
+    sear = request.GET.get('sear', '')
+
+    if sear:
+        post = post.filter(user=sear)
+
+    return render(request, 'html/main.html', {'post':post, 'sear': sear})
 
 def logout(request):
     django_logout(request)
@@ -74,3 +75,13 @@ def detail(request):
     post = Post.objects.all()
     return render(request, 'html/list.html',{'post': post})
 
+def search(request):
+#     form = SearchForm()
+#     def form
+    post = Post.objects.all()
+    sear = request.GET.get('sear', '')
+
+    if sear:
+        post = post.filter(user=sear)
+
+    return render(request, 'html/search.html', {'post':post, 'sear': sear})
