@@ -64,6 +64,10 @@ def post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
+            #이미지
+            #PostForm(request.FILES['image'])
+
+
             post = form.save(commit=False)
             post.save()
             return redirect('main')

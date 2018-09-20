@@ -79,6 +79,10 @@ class RegisterForm(forms.Form):
             )
 
 class PostForm(forms.ModelForm):
+    #이미지 
+    #def __init__(self, *args, **kwargs):
+     #   self.fields['image'].required = False
+    
     class Meta:
         model = Post
         fields = ('user', 'content')
