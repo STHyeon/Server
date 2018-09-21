@@ -1,5 +1,11 @@
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 from .forms import LoginForm, RegisterForm, PostForm
@@ -78,3 +84,16 @@ def post(request):
 def detail(request):
     post = Post.objects.all()
     return render(request, 'html/list.html',{'post': post})
+'''
+@login_required
+def like(request):
+    if request.method == 'POST':
+        user = request.user
+        post_id = request.POST.get('pk', None)
+        post = Post.objects.get(pk = post_id)
+
+        if post.likes.filter(id = user.id).exists()
+            post.likes.remove(user)
+        else:
+            post.likes.add(user)
+'''

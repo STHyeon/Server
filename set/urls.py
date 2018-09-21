@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name="logout"),
     url(r'^post/$', views.post, name='post'),
     url(r'^list/$', views.detail, name="detail"),
+    #url(r'^like/$', views.like, name='like'),
 ]
