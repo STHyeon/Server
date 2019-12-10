@@ -1,0 +1,63 @@
+/*@font-face {
+  font-family: "typo";
+  src: url(../font/typo.ttf) format("truetype");
+}*/
+
+#con {
+  padding: 0;
+}
+
+#im {
+  position: absolute;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-image: url('../img/main.png');
+}
+
+input {
+  width: 300px;
+  height: 30px;
+}
+
+#box {
+  position: relative;
+  top: 50%;
+  width: 350px;
+  height: 200px;
+}
+
+.button {
+  width: 86px;
+  height: 43px;
+  color: black;
+  border: 1px solid #bcbcbc;
+  border-radius: 14px;
+  margin-right: 10px;
+  margin-left: 36px;
+  display: block;
+  float: left;
+  background-color: aquamarine;
+}
+
+.but {
+  float: left;
+}
+
+.spac {
+  width: 1px;
+  height: 405px;
+}
+
+.r_sear {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.col-sm-4 {
+  border: 1px solid #bcbcbc;
+}
+
+.g_btu {
+  margin: 10px;
+}

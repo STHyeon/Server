@@ -1,0 +1,37 @@
+{% extends 'html/base.html' %}
+{% load staticfiles %}
+
+{% block stylesheet %}{% static "css/login.css" %}{% endblock %}
+{% block title %}로그인{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="center-block" id="box">
+      <div class="center-block" id="box1"></div>
+      <div class="center-block" id="box3">
+        <div class="" id="box4">
+          <p class="po" id="fl">계정이<br />있으신가요?</p>
+          <p class="po" id="fl1">글길의 오신 걸 환영합니다.</p>
+        </div>
+        <div id="box5">
+          <a href="{% url 'register' %}"><button type="button">회원가입</button></a>
+        </div>
+      </div>
+      <div class="center-block" id="box2">
+        <div id="con1">
+          <p id="join">로그인</p>
+          <form method="POST">
+            {% csrf_token %}
+            {% for field in login_form %}
+              <div class="form-group">
+                {{ field }}
+              </div>
+            {% endfor %}
+          </div>
+          <div id="con2">
+            <button type="submit" id="bu">로그인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

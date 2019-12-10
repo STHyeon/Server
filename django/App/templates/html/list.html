@@ -1,0 +1,42 @@
+{% extends 'html/base.html' %}
+{% load staticfiles %}
+{% block stylesheet %}{% static "css/list.css" %}{% endblock %}
+{% block title %}리스트{% endblock %}
+{% block content %}
+    <div class="container">
+        <p class="r_sear">목록</p>
+        <div class="row">
+            {% for list in post %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <button type="button" data-toggle="modal" data-target="#lst"><img class="card-img-top" src="{% static 'img/logo.png' %}" alt="log"></button>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ list.user }}</h4>
+                            <!--<p class="card-text">{{ list.content }}</p>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="lst">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body">
+                                <img class="card-img-top" src="{% static 'img/logo.png' %}" alt="log">
+                                {{ list.content }}
+                            </div>
+
+                            <div class="modal-footer">
+                                <p>해시태그</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>    
+    </div>
+{% endblock %}
