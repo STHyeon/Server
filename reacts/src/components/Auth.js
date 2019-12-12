@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Auth = () => {
+const Auth = props => {
     const Login = () => {
         return (
             <div className="inner">
@@ -32,11 +32,33 @@ const Auth = () => {
             </div>
         );
     };
-    return (
-        <div>
-            <Login />
-        </div>
-    );
+
+    const Register = () => {
+        return (
+            <div className="inner">
+                <div className="register_container">
+                    <div className="brown">
+                        <div className="input_box">
+                            <h1 className="text1">회원가입</h1>
+                            <input type="text" className="register_input" placeholder="아이디" />
+                            <input
+                                type="password"
+                                className="register_input"
+                                placeholder="비밀번호"
+                            />
+                            <input
+                                type="password1"
+                                className="register_input"
+                                placeholder="비밀번호 확인"
+                            />
+                            <button className="register_button">회원가입</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    return <div>{props.mode ? <Login /> : <Register />}</div>;
 };
 
 export default Auth;

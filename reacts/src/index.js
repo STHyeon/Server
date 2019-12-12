@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.scss";
-import { App, Login } from "./containers";
+import { App, Login, Register } from "./containers";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
@@ -9,11 +9,18 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
+const store = createStore(
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 ReactDOM.render(
-    <Router>
-        <Route exact={true} path="/" component={App} />
-        <Route path="/login" component={Login} />
-    </Router>,
+    <Provider store={store}>
+        <Router>
+            <Route exact={true} path="/" component={App} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+        </Router>
+    </Provider>,
     document.getElementById("root")
 );
 

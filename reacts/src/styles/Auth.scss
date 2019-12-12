@@ -2,11 +2,6 @@
     position: relative;
     height: calc(100vh - 90px);
 
-    font: {
-        family: "gothic";
-        size: 20px;
-    }
-
     color: #ffffff;
 
     .brown {
@@ -78,7 +73,6 @@
                         right: 0;
                         left: 0;
                         bottom: 1px solid black;
-
                     }
                 }
 
@@ -97,6 +91,67 @@
                         color: #ffffff;
                         transition: background-color 1s ease-out;
                     }
+                }
+            }
+        }
+    }
+}
+
+.register_container {
+    height: calc(100vh - 90px);
+
+    .brown {
+        position: absolute;
+        width: 75%;
+        height: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #484841;
+
+        .input_box {
+            position: absolute;
+            top: -50px;
+            left: 140px;
+            width: 70%;
+            height: 500px;
+            padding: 30px 50px;
+            background-color: #ffffff;
+
+            .text1 {
+                font: {
+                    size: 30px;
+                    weight: bold;
+                }
+            }
+
+            .register_input {
+                width: 100%;
+                margin-top: 40px;
+                font-size: 20px;
+
+                border: {
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 1px solid black;
+                }
+            }
+
+            .register_button {
+                width: 100%;
+                margin-top: 70px;
+                padding: 5px 10px;
+                border: 3px solid #484841;
+                border-radius: 10px;
+                background-color: #ffffff;
+                font-size: 20px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #484841;
+                    color: #ffffff;
+                    transition: background-color 1s ease-out;
                 }
             }
         }

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Common from "./Common";
 import { Auth } from "../components";
 
-const Login = () => {
-    const [mode, setMode] = useState(true);
+const Register = () => {
+    const [mode, setMode] = useState(false);
     return (
         <Common>
             <Auth mode={mode} />
@@ -11,4 +11,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
