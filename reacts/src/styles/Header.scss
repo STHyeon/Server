@@ -1,0 +1,36 @@
+.nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 90px;
+    font-family: "baloo";
+    font-size: 20px;
+    background: #ffffff;
+
+    .logo {
+        width: 72px;
+        float: left;
+        padding: 20px 0;
+    }
+
+    .navbar {
+        li {
+            float: right;
+            margin-left: 15px;
+            line-height: 5;
+
+            &:last-child {
+                margin: 0;
+            }
+
+            &:hover {
+                color: #395E98;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.hidden_header {
+    height: 90px;
+}
