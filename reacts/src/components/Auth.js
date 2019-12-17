@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Auth = props => {
+    // const [form, setValues] = useState({
+    //     username: "",
+    //     password: ""
+    // });
+
+    // const handleChange = e => {
+    //     setValues({
+    //         ...form,
+    //         [e.target.name]: e.target.value
+    //     });
+    // };
+
     const Login = () => {
+        const [username, setUsername] = useState("");
+        const [password, setPassword] = useState("");
+        const handleLogin = () => {
+            props.onLogin({ username, password });
+        };
         return (
             <div className="inner">
                 <div className="login">
@@ -18,13 +35,26 @@ const Auth = props => {
                         <div className="login_contain">
                             <h1>로그인</h1>
                             <div className="login_box">
-                                <input type="text" className="login_input" placeholder="아이디" />
                                 <input
-                                    type="passsword"
+                                    type="text"
                                     className="login_input"
-                                    placeholder="비밀번호"
+                                    name="username"
+                                    placeholder="아이디"
+                                    value={username}
+                                    onChange={({ target: { value } }) => setUsername(value)}
                                 />
-                                <button className="login_button">로그인</button>
+
+                                <input
+                                    type="password"
+                                    className="login_input"
+                                    name="password"
+                                    placeholder="비밀번호"
+                                    value={password}
+                                    onChange={({ target: { value } }) => setPassword(value)}
+                                />
+                                <button className="login_button" onClick={handleLogin}>
+                                    로그인
+                                </button>
                             </div>
                         </div>
                     </div>

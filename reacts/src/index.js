@@ -6,12 +6,22 @@ import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
 //redux
+import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createLogger } from "redux-logger/src";
+import createSagaMiddleware from "redux-saga";
+import rootReducer, { rootSaga } from "./modules";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+const logger = createLogger();
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    rootReducer,
+    composeWithDevTools(applyMiddleware(logger, sagaMiddleware))
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>
