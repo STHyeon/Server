@@ -1,19 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import history from "../lib/utils/history";
+
 const Auth = props => {
-    // const [form, setValues] = useState({
-    //     username: "",
-    //     password: ""
-    // });
-
-    // const handleChange = e => {
-    //     setValues({
-    //         ...form,
-    //         [e.target.name]: e.target.value
-    //     });
-    // };
-
     const Login = () => {
         const [username, setUsername] = useState("");
         const [password, setPassword] = useState("");
@@ -64,24 +54,45 @@ const Auth = props => {
     };
 
     const Register = () => {
+        const [username, setUsername] = useState("");
+        const [password, setPassword] = useState("");
+        const [password2, setPassword2] = useState("");
+        const handleRegister = e => {
+            e.preventDefault();
+            props.onRegister({ username, password, password2 });
+        };
         return (
             <div className="inner">
                 <div className="register_container">
                     <div className="brown">
                         <div className="input_box">
                             <h1 className="text1">회원가입</h1>
-                            <input type="text" className="register_input" placeholder="아이디" />
+                            <input
+                                type="text"
+                                className="register_input"
+                                placeholder="아이디"
+                                onChange={({ target: { value } }) => setUsername(value)}
+                            />
                             <input
                                 type="password"
                                 className="register_input"
                                 placeholder="비밀번호"
+                                onChange={({ target: { value } }) => setPassword(value)}
                             />
                             <input
                                 type="password1"
                                 className="register_input"
                                 placeholder="비밀번호 확인"
+                                onChange={({ target: { value } }) => setPassword2(value)}
                             />
-                            <button className="register_button">회원가입</button>
+                            <button
+                                type="submit"
+                                className="register_button"
+                                onClick={handleRegister}
+                            >
+                                회원가입
+                            </button>
+                            {props.authError ? <p className="authError">{props.authError}</p> : ""}
                         </div>
                     </div>
                 </div>

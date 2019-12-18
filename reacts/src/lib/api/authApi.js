@@ -4,8 +4,8 @@ const base = axios.create({
     baseURL: "http://localhost:8080"
 });
 
-export const apiRegister = () => {
-    return base.post("/auth/register");
+export const apiRegister = param => {
+    return base.post("/auth/register", { param });
 };
 
 export const apiLogin = param => {

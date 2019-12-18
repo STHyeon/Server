@@ -2,13 +2,28 @@ import React, { useState } from "react";
 import Common from "./Common";
 import { Auth } from "../components";
 
-const Register = () => {
+import { connect } from "react-redux";
+import { postRegister } from "../modules/auth";
+
+const Register = ({ authError, postRegister }) => {
     const [mode, setMode] = useState(false);
+
+    const onRegister = ({ username, password, password2 }) => {
+        postRegister({ username, password, password2 });
+    };
+
     return (
         <Common>
-            <Auth mode={mode} />
+            <Auth mode={mode} onRegister={onRegister} authError={authError} />
         </Common>
     );
 };
 
-export default Register;
+export default connect(
+    ({ auth }) => ({
+        authError: auth.auth.message
+    }),
+    {
+        postRegister
+    }
+)(Register);

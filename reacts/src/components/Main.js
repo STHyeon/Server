@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import R2 from "../lib/img/r2.png";
 
 const Main = () => {
@@ -9,8 +10,8 @@ const Main = () => {
                     <div className="backImg">
                         <div className="wrap_text">
                             <div className="wrap_text_box">
-                                {/* <p className="text1">오늘의 기분은 어떠신가요?</p>
-                                <p className="text2">글로써 삶의 길을 살아가요</p> */}
+                                <p className="text1">오늘의 기분은 어떠신가요?</p>
+                                <p className="text2">글로써 삶의 길을 살아가요</p>
                             </div>
                         </div>
                     </div>
@@ -19,6 +20,7 @@ const Main = () => {
 
             <section className="section2">
                 <div className="inner">
+                    {/* <Link to="/"> */}
                     <div className="card">
                         <div className="card-img">
                             <img src={R2} alt="card-img" />
@@ -28,6 +30,7 @@ const Main = () => {
                             <p>a</p>
                         </div>
                     </div>
+                    {/* </Link> */}
                     <div className="card">
                         <div className="card-img">
                             <img src={R2} alt="card-img" />

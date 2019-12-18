@@ -12,20 +12,23 @@ import { createLogger } from "redux-logger/src";
 import createSagaMiddleware from "redux-saga";
 import rootReducer, { rootSaga } from "./modules";
 import { composeWithDevTools } from "redux-devtools-extension";
+import history from "./lib/utils/history";
+import { routerMiddleware } from "react-router-redux";
 
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
-
+const routersMiddleware = routerMiddleware(history);
+const middlewares = [sagaMiddleware, routersMiddleware];
 const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(logger, sagaMiddleware))
+    composeWithDevTools(applyMiddleware(logger, ...middlewares))
 );
 
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={history}>
             <Route exact={true} path="/" component={App} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
