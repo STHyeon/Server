@@ -5,11 +5,11 @@ import { Auth } from "../components";
 import { connect } from "react-redux";
 import { postLogin } from "../modules/auth";
 
-const Login = ({ postLogin }) => {
+const Login = ({ history, postLogin }) => {
     const [mode, setMode] = useState(true);
 
     const onLogin = ({ username, password }) => {
-        postLogin({ username, password });
+        postLogin({ username, password, history });
     };
 
     return (

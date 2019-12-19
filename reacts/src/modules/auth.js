@@ -1,8 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { put, call, takeLatest } from "redux-saga/effects";
 import * as api from "../lib/api/authApi";
-// import { push } from "react-router-redux";
-import history from "../lib/utils/history";
 
 //register
 const POST_REGISTER = "auth/POST_REGISTER";
@@ -22,7 +20,6 @@ function* postRegisterSaga(action) {
             type: POST_REGISTER_SUCCESS,
             payload: resRegister
         });
-        // history.replace("/");
     } catch (err) {
         yield put({
             type: POST_REGISTER_FAILURE,
@@ -30,7 +27,6 @@ function* postRegisterSaga(action) {
             error: true
         });
     }
-    // yield put(push("/"));
 }
 
 export function* watchRegister() {
@@ -43,19 +39,22 @@ const POST_LOGIN_SUCCESS = "auth/POST_LOGIN_SUCCESS";
 const POST_LOGIN_FAILURE = "auth/POST_LOGIN_FAILURE";
 
 //export const postRegister = text => ({ type: POST_REGISTER, payload: text })
-export const postLogin = createAction(POST_LOGIN, ({ username, password }) => ({
+export const postLogin = createAction(POST_LOGIN, ({ username, password, history }) => ({
     username,
-    password
+    password,
+    history
 }));
 
 function* postLoginSaga(action) {
     try {
         const resLogin = yield call(api.apiLogin, action.payload);
+        const { history } = action.payload;
         yield put({
             type: POST_LOGIN_SUCCESS,
             payload: resLogin
         });
         history.push("/");
+        console.log("aa");
     } catch (err) {
         yield put({
             type: POST_LOGIN_FAILURE,

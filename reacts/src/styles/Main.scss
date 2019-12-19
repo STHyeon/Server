@@ -31,7 +31,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -43,10 +42,13 @@
         width: 32.3%;
         height: 100%;
         float: left;
-        margin-right: 10px;
+        margin: {
+            right: 10px;
+            bottom: 10px;
+        }
 
         &:nth-child(3n) {
-            margin: 0;
+            margin-right: 0;
         }
 
         padding: 10px;

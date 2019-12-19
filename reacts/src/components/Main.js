@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import R2 from "../lib/img/r2.png";
+import { Detail } from "../components";
 
 const Main = () => {
+    const [isOpen, setIsOpen] = useState(true);
     return (
         <div>
+            <section>
+                {isOpen ? (
+                    <div>
+                        <div className="curtain" onClick={() => setIsOpen(false)}></div>
+                        <Detail />
+                    </div>
+                ) : null}
+            </section>
+
             <section className="section1">
                 <div className="inner">
                     <div className="backImg">
@@ -20,18 +31,7 @@ const Main = () => {
 
             <section className="section2">
                 <div className="inner">
-                    {/* <Link to="/"> */}
-                    <div className="card">
-                        <div className="card-img">
-                            <img src={R2} alt="card-img" />
-                        </div>
-                        <div className="card-tag">태그</div>
-                        <div className="card-title">
-                            <p>a</p>
-                        </div>
-                    </div>
-                    {/* </Link> */}
-                    <div className="card">
+                    <div className="card" onClick={() => setIsOpen(true)}>
                         <div className="card-img">
                             <img src={R2} alt="card-img" />
                         </div>
