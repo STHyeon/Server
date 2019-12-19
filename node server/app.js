@@ -14,7 +14,7 @@ app.listen(port, () => console.log(port));
 
 //router
 app.use("/auth", require("./routes/auth"));
-// app.use("/post", require("./routes/post"));
+app.use("/post", require("./routes/post"));
 
 //usCreateIndex, useNewUrlParser 는 오류 방지용
 mongoose.set("useCreateIndex", true);

@@ -11,3 +11,7 @@ export const apiRegister = param => {
 export const apiLogin = param => {
     return base.post("/auth/login", { param });
 };
+
+export const apiList = () => {
+    return base.get("/post/list");
+};

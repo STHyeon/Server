@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Main } from "../components";
 import Common from "./Common";
 
-function App() {
-    const [isOpen, setIsOpen] = useState(false);
+import { getList } from "../modules/post";
+import { connect } from "react-redux";
+
+function App({ getList, postList }) {
     return (
         <div>
             <div className="wrap">
                 <Common>
-                    <Main />
+                    <Main data={postList} onList={getList} />
                 </Common>
             </div>
         </div>
     );
 }
 
-export default App;
+export default connect(
+    ({ post }) => ({
+        postList: post.list.postList
+    }),
+    {
+        getList
+    }
+)(App);

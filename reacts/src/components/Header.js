@@ -15,10 +15,10 @@ const Header = () => {
                     <div className="navbar">
                         <ul>
                             <li>
-                                <Link to="/register">REGISTER</Link>
+                                <Link to="/write">WRITE</Link>
                             </li>
                             <li>
-                                <Link to="/login">LOGIN</Link>
+                                <Link to="/login">LOGIN / REGISTER</Link>
                             </li>
                             <li>
                                 <Link to="/">HOME</Link>

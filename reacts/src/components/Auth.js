@@ -6,7 +6,6 @@ const Auth = props => {
         const [username, setUsername] = useState("");
         const [password, setPassword] = useState("");
         const handleLogin = () => {
-            // const { history } = this.props;
             props.onLogin({ username, password });
         };
         return (

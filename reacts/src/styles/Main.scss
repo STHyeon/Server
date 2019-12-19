@@ -47,6 +47,12 @@
             bottom: 10px;
         }
 
+        .card-img {
+            img {
+                width: 100%;
+            }
+        }
+
         &:nth-child(3n) {
             margin-right: 0;
         }

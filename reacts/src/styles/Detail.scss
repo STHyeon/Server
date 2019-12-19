@@ -17,6 +17,8 @@
     }
 
     .detail_content {
+        position: relative;
+        width: 100%;
         padding: 10px 16px 10px 536px;
 
         .menu {
@@ -63,6 +65,7 @@
 
                 p {
                     text-align: center;
+                    cursor: pointer;
 
                     span {
                         vertical-align: top;
@@ -71,11 +74,60 @@
                             left: 10px;
                         }
                     }
+
+                    .like_on {
+                        display: none;
+                    }
+
+                    &:hover {
+                        .like_on {
+                            display: inline-block;
+                        }
+
+                        .like_off {
+                            display: none;
+                        }
+                    }
                 }
             }
         }
 
-        .detail_comments {
+        .detail_comments_box {
+            span,
+            input,
+            p {
+                display: inline-block;
+            }
+            .detail_comments_content {
+                padding-top: 5px;
+                span {
+                    padding-right: 10px;
+                }
+                p {
+                    vertical-align: top;
+                    padding: 5px;
+                    background: #f2f3f5;
+                }
+            }
+
+            .detail_comments_input {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 55.7%;
+                background: #f2f3f5;
+                span {
+                    padding: 10px 5px 5px 10px;
+                }
+                input {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 80%;
+                    margin: 10px;
+                    padding: 5px;
+                    border-radius: 15px;
+                }
+            }
         }
     }
 }
