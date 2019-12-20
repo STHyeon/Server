@@ -53,8 +53,9 @@ function* postLoginSaga(action) {
             type: POST_LOGIN_SUCCESS,
             payload: resLogin
         });
+        localStorage.setItem("username", action.payload.username);
+        localStorage.setItem("token", resLogin.data.token);
         history.push("/");
-        console.log("aa");
     } catch (err) {
         yield put({
             type: POST_LOGIN_FAILURE,
@@ -72,7 +73,9 @@ const initialState = {
     auth: {
         status: "INIT",
         message: "",
-        error: false
+        error: false,
+        username: localStorage.getItem("username"),
+        isLogin: localStorage.getItem("token")
     }
 };
 

@@ -1,7 +1,21 @@
 const router = require("express").Router();
 const Auth = require("../models/auth");
 
+const jwt = require("jsonwebtoken");
+const secrectObj = require("../config/jwt");
+
 router.post("/login", function(req, res) {
+    let token = jwt.sign(
+        {
+            username: req.body.param.username //토큰 내용
+            // username: req.body.username //토큰 내용
+        },
+        secrectObj.secret, // 비밀키
+        {
+            expiresIn: "5m" // 유효 시간: 5분
+        }
+    );
+
     Auth.findOne({ username: req.body.param.username }, (err, authExist) => {
         if (err) throw err;
         if (!authExist) {
@@ -14,7 +28,8 @@ router.post("/login", function(req, res) {
                 error: "비밀번호가 일치하지 않습니다."
             });
         }
-        return res.json({ success: true });
+
+        return res.json({ success: true, token: token });
     });
 });
 

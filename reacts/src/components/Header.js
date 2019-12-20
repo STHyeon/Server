@@ -15,14 +15,27 @@ const Header = props => {
                     <div className="navbar">
                         <ul>
                             <li>
-                                <Link onClick={props.onToggle}>WRITE</Link>
+                                <span onClick={props.onToggle}>WRITE</span>
                             </li>
-                            <li>
-                                <Link to="/login">LOGIN / REGISTER</Link>
-                            </li>
-                            <li>
-                                <Link to="/">HOME</Link>
-                            </li>
+                            {props.isLogin ? (
+                                <div>
+                                    <li>
+                                        <span>Logout</span>
+                                    </li>
+                                    <li>
+                                        <span>{props.username}</span>님
+                                    </li>
+                                </div>
+                            ) : (
+                                <div>
+                                    <li>
+                                        <Link to="/login">LOGIN / REGISTER</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/">HOME</Link>
+                                    </li>
+                                </div>
+                            )}
                         </ul>
                     </div>
                 </div>
