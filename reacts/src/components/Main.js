@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Detail } from "../components";
+import { Detail, Write } from "../components";
 import R2 from "../lib/img/r2.png";
 
-const Main = ({ data, onList }) => {
+const Main = ({ writeToggle, data, onList }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
@@ -26,11 +26,11 @@ const Main = ({ data, onList }) => {
     };
 
     const cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
-    useEffect(() => {
-        setInterval(() => {
-            onList();
-        }, 5000);
-    }, [data]);
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         onList();
+    //     }, 5000);
+    // }, []);
 
     return (
         <div>
@@ -38,6 +38,13 @@ const Main = ({ data, onList }) => {
                 <div>
                     <div className="curtain" onClick={() => setIsOpen(false)}></div>
                     <Detail data={detailData} />
+                </div>
+            ) : null}
+
+            {writeToggle ? (
+                <div>
+                    {/* <div className="curtain" onClick={() => setIsOpen(false)}></div> */}
+                    <Write />
                 </div>
             ) : null}
             <section className="section1">

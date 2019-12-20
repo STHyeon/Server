@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../lib/img/logo.png";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = props => {
     return (
         <div>
             <nav className="nav">
@@ -15,7 +15,7 @@ const Header = () => {
                     <div className="navbar">
                         <ul>
                             <li>
-                                <Link to="/write">WRITE</Link>
+                                <Link onClick={props.onToggle}>WRITE</Link>
                             </li>
                             <li>
                                 <Link to="/login">LOGIN / REGISTER</Link>
