@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Common from "./Common";
 import { Auth } from "../components";
 
 import { connect } from "react-redux";
@@ -13,9 +12,9 @@ const Login = ({ history, postLogin }) => {
     };
 
     return (
-        <Common>
-            <Auth mode={mode} onLogin={onLogin} />
-        </Common>
+        // <Common>
+        <Auth mode={mode} onLogin={onLogin} />
+        // </Common>
     );
 };
 

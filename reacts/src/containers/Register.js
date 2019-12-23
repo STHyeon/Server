@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Common from "./Common";
 import { Auth } from "../components";
 
 import { connect } from "react-redux";
@@ -13,9 +12,9 @@ const Register = ({ authError, postRegister }) => {
     };
 
     return (
-        <Common>
-            <Auth mode={mode} onRegister={onRegister} authError={authError} />
-        </Common>
+        // <Common>
+        <Auth mode={mode} onRegister={onRegister} authError={authError} />
+        // </Common>
     );
 };
 

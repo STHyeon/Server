@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../lib/img/logo.png";
 import { Link } from "react-router-dom";
+import { Context } from "../context/Common";
 
 const Header = props => {
+    const { username } = useContext(Context);
     return (
         <div>
             <nav className="nav">
@@ -17,7 +19,7 @@ const Header = props => {
                             <li>
                                 <span onClick={props.onToggle}>WRITE</span>
                             </li>
-                            {props.isLogin ? (
+                            {username ? (
                                 <div>
                                     <li>
                                         <span>Logout</span>

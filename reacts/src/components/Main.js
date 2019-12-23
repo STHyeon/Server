@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../context/Common";
 import { Detail, Write } from "../components";
 import R2 from "../lib/img/r2.png";
 
-const Main = ({ writeToggle, data, onList }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const Main = ({ data, onList }) => {
+    const { writeToggle, setIsOpen, detailToggle, setDetailToggle } = useContext(Context);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
@@ -11,6 +12,7 @@ const Main = ({ writeToggle, data, onList }) => {
                 className="card"
                 onClick={() => {
                     setIsOpen(true);
+                    setDetailToggle(true);
                     setDetailData(props);
                 }}
             >
@@ -29,21 +31,19 @@ const Main = ({ writeToggle, data, onList }) => {
     // useEffect(() => {
     //     setInterval(() => {
     //         onList();
-    //     }, 5000);
+    //     }, 1000);
     // }, []);
 
     return (
         <div>
-            {isOpen ? (
+            {detailToggle ? (
                 <div>
-                    <div className="curtain" onClick={() => setIsOpen(false)}></div>
                     <Detail data={detailData} />
                 </div>
             ) : null}
 
             {writeToggle ? (
                 <div>
-                    {/* <div className="curtain" onClick={() => setIsOpen(false)}></div> */}
                     <Write />
                 </div>
             ) : null}

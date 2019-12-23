@@ -1,25 +1,26 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
+import { CommonContext } from "../context/Common";
 import { Main } from "../components";
-import Common from "./Common";
+import { Common } from "../components";
 
 import { getList } from "../modules/post";
 import { connect } from "react-redux";
 
-function App({ getList, postList }) {
+function App({ getList, postList, username, isLogin }) {
     return (
-        <div>
-            <div className="wrap">
-                <Common>
-                    <Main data={postList} onList={getList} />
-                </Common>
-            </div>
+        <div className="wrap">
+            <CommonContext username={username} isLogin={isLogin}>
+                <Main data={postList} onList={getList} />
+            </CommonContext>
         </div>
     );
 }
 
 export default connect(
-    ({ post }) => ({
-        postList: post.list.postList
+    ({ post, auth }) => ({
+        postList: post.list.postList,
+        username: auth.auth.username,
+        isLogin: auth.auth.isLogin
     }),
     {
         getList

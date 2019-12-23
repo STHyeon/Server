@@ -1,7 +1,7 @@
-import Header from "./Header";
 import Main from "./Main";
 import Auth from "./Auth";
 import Detail from "./Detail";
 import Write from "./Write";
+import Header from "./Header";
 
-export { Header, Main, Auth, Detail, Write };
+export { Main, Auth, Detail, Write, Header };
