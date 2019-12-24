@@ -11,7 +11,9 @@ const Detail = props => {
     return (
         <div className="detail">
             <div className="detail_img">
-                <img src={r2} />
+                {/* <img src={r2} /> */}
+                {props.data.dataList.img}
+                <img src={props.data.dataList.img} alt="글사진" />
             </div>
             <div className="detail_content">
                 <div className="detail_person">

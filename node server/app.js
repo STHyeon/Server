@@ -13,8 +13,10 @@ app.use(cors());
 app.listen(port, () => console.log(port));
 
 //router
-app.use("/auth", require("./routes/auth"));
-app.use("/post", require("./routes/post"));
+// app.use("/auth", require("./routes/auth"));
+// app.use("/post", require("./routes/post"));
+app.use("/test", require("./routes/test"));
+app.use(express.static("uploads"));
 
 //usCreateIndex, useNewUrlParser 는 오류 방지용
 mongoose.set("useCreateIndex", true);

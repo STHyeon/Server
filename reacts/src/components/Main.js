@@ -28,11 +28,11 @@ const Main = ({ data, onList, onPost }) => {
     };
 
     const cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         onList();
-    //     }, 1000);
-    // }, []);
+    useEffect(() => {
+        setInterval(() => {
+            onList();
+        }, 1000);
+    }, []);
 
     return (
         <div>
