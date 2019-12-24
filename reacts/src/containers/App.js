@@ -1,16 +1,20 @@
 import React, { createContext, useContext } from "react";
 import { CommonContext } from "../context/Common";
 import { Main } from "../components";
-import { Common } from "../components";
 
-import { getList } from "../modules/post";
+import { getList, postWrite } from "../modules/post";
 import { connect } from "react-redux";
 
-function App({ getList, postList, username, isLogin }) {
+function App({ getList, postWrite, postList, username, isLogin }) {
+    const onPost = ({ username, content }) => {
+        postWrite({ username, content });
+        // console.log(username, content);
+    };
+
     return (
         <div className="wrap">
             <CommonContext username={username} isLogin={isLogin}>
-                <Main data={postList} onList={getList} />
+                <Main data={postList} onList={getList} onPost={onPost} />
             </CommonContext>
         </div>
     );
@@ -23,6 +27,7 @@ export default connect(
         isLogin: auth.auth.isLogin
     }),
     {
-        getList
+        getList,
+        postWrite
     }
 )(App);

@@ -24,12 +24,16 @@
             }
 
             &:hover {
-                color: #395E98;
+                color: #395e98;
                 text-decoration: underline;
             }
 
             span {
                 cursor: pointer;
+            }
+
+            .nim {
+                font-weight: bold;
             }
         }
     }

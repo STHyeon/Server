@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { put, call, takeLatest } from "redux-saga/effects";
-import * as api from "../lib/api/authApi";
+import * as api from "../lib/api/connectApi";
 
 //register
 const POST_REGISTER = "auth/POST_REGISTER";

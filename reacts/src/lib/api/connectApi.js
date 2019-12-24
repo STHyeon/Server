@@ -15,3 +15,7 @@ export const apiLogin = param => {
 export const apiList = () => {
     return base.get("/post/list");
 };
+
+export const apiPost = param => {
+    return base.post("/post/post", { param });
+};

@@ -25,7 +25,8 @@ const Header = props => {
                                         <span>Logout</span>
                                     </li>
                                     <li>
-                                        <span>{props.username}</span>님
+                                        <span>{props.username}</span>
+                                        <span className="nim">님</span>
                                     </li>
                                 </div>
                             ) : (

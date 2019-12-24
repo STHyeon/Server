@@ -11,8 +11,8 @@ const CommonContext = props => {
 
     const { username, isLogin } = props;
 
-    const [writeToggle, setWriteToggle] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [writeToggle, setWriteToggle] = useState(false);
     const [detailToggle, setDetailToggle] = useState(false);
     const handleToggle = () => {
         setWriteToggle(!writeToggle);

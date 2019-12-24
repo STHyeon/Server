@@ -3,7 +3,7 @@ import { Context } from "../context/Common";
 import { Detail, Write } from "../components";
 import R2 from "../lib/img/r2.png";
 
-const Main = ({ data, onList }) => {
+const Main = ({ data, onList, onPost }) => {
     const { writeToggle, setIsOpen, detailToggle, setDetailToggle } = useContext(Context);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
@@ -44,7 +44,7 @@ const Main = ({ data, onList }) => {
 
             {writeToggle ? (
                 <div>
-                    <Write />
+                    <Write onPost={onPost} />
                 </div>
             ) : null}
             <section className="section1">
