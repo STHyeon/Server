@@ -14,9 +14,16 @@ const Write = props => {
 
     const [username, setUsername] = useState(localStorage.getItem("username"));
     const [content, setContent] = useState("");
-    const [C_img, setC_img] = useState("");
-    const handlePost = () => {
-        props.onPost({ username, content, C_img });
+    const [img, setC_img] = useState(null);
+
+    const formData = new FormData();
+    formData.append("img", img);
+    formData.append("username", username);
+    formData.append("content", content);
+
+    const handlePost = e => {
+        e.preventDefault();
+        props.onPost(formData);
     };
 
     const [T_Image, setT_Image] = useState("");
@@ -28,7 +35,11 @@ const Write = props => {
                     <p>{T_Image}</p>
                     <img src={w1} alt="writeback" />
                 </div>
-                <div className="write_text_box" encType="multipart/form-data">
+                <form
+                    className="write_text_box"
+                    encType="multipart/form-data"
+                    onSubmit={handlePost}
+                >
                     <div className="input_box">
                         <textarea
                             placeholder="사진 속에 들어갈 내용을 써주세요."
@@ -45,21 +56,19 @@ const Write = props => {
                     </div>
                     <input
                         type="file"
-                        name="abc"
-                        value={C_img}
-                        onChange={({ target: { value } }) => setC_img(value)}
-                        // onChange={({ e }) => setC_img(e.target.files[0])}
+                        name="img"
+                        onChange={({ target: { files } }) => setC_img(files[0])}
                     />
                     <button
                         type="submit"
-                        onClick={() => {
-                            // Capture();
-                            handlePost();
-                        }}
+                        // onClick={() => {
+                        //     // Capture();
+                        //     handlePost();
+                        // }}
                     >
                         올리기
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     );

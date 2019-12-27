@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
-import { Detail, Write } from "../components";
+import { Detail, Write, Test } from "../components";
 import R2 from "../lib/img/r2.png";
 
-const Main = ({ data, onList, onPost }) => {
+const Main = ({ data, onList, onPost, onImage }) => {
     const { writeToggle, setIsOpen, detailToggle, setDetailToggle } = useContext(Context);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
@@ -28,11 +28,11 @@ const Main = ({ data, onList, onPost }) => {
     };
 
     const cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
-    useEffect(() => {
-        setInterval(() => {
-            onList();
-        }, 1000);
-    }, []);
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         onList();
+    //     }, 1000);
+    // }, []);
 
     return (
         <div>
@@ -44,7 +44,7 @@ const Main = ({ data, onList, onPost }) => {
 
             {writeToggle ? (
                 <div>
-                    <Write onPost={onPost} />
+                    <Write onPost={onPost} onImage={onImage} />
                 </div>
             ) : null}
             <section className="section1">

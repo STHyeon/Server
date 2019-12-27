@@ -6,9 +6,8 @@ import { getList, postWrite } from "../modules/post";
 import { connect } from "react-redux";
 
 function App({ getList, postWrite, postList, username, isLogin }) {
-    const onPost = ({ username, content, C_img }) => {
-        postWrite({ username, content, C_img });
-        console.log(username, content, C_img);
+    const onPost = formData => {
+        postWrite(formData);
     };
 
     return (

@@ -33,11 +33,7 @@ const POST_WRITE = "post/POST_WRITE";
 const POST_WRITE_SUCCESS = "post/POST_WRITE_SUCCESS";
 const POST_WRITE_FAILURE = "post/POST_WRITE_FAILURE";
 
-export const postWrite = createAction(POST_WRITE, ({ username, content, C_img }) => ({
-    username,
-    content,
-    C_img
-}));
+export const postWrite = createAction(POST_WRITE, formData => formData);
 
 export function* postWriteSaga(action) {
     try {

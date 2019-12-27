@@ -7,7 +7,8 @@ let storage = multer.diskStorage({
         callback(null, "uploads/");
     },
     filename: function(req, file, callback) {
-        callback(null, file.originalname);
+        // callback(null, file.originalname);
+        callback(null, "IMAGE-" + Date.now() + file.originalname);
     }
 });
 
@@ -36,19 +37,17 @@ router.get("/list", function(req, res) {
 });
 
 router.post("/post", upload.single("img"), function(req, res) {
-    // if (req.body.author < 1 || req.body.content < 1) {
-    //     return res.status(400).json({
-    //         error: "빈칸이 있습니다."
-    //     });
-    // }
-    const url = req.protocol + "://" + req.get("host");
+    if (req.body.author < 1 || req.body.content < 1) {
+        return res.status(400).json({
+            error: "로그인이 되어 있지않거나 빈칸이 있습니다."
+        });
+    }
 
     let postCreate = new Post({
-        // author: req.body.username,
-        // content: req.body.content,
-        img: url + "/uploads/" + req.body.C_img
+        author: req.body.username,
+        content: req.body.content,
+        img: req.file.path
     });
-    console.log(postCreate.img);
 
     postCreate.save(err => {
         if (err) throw err;

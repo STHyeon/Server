@@ -1,7 +1,9 @@
 import React from "react";
+import * as api from "../lib/api/connectApi";
+
 const axios = require("axios");
 
-class ReactUploadImage extends React.Component {
+class Test extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +16,14 @@ class ReactUploadImage extends React.Component {
         e.preventDefault();
         const formData = new FormData();
         formData.append("img", this.state.file);
-
-        axios
-            .post("http://localhost:8080/test/upload", { param: formData })
-            .then(response => {})
-            .catch(error => {});
+        this.props.onPost(formData);
+        // axios
+        //     .post("http://localhost:8080/post/post", formData)
+        //     // .post(api.apiTest, formData)
+        //     .then(response => {
+        //         console.log(formData);
+        //     })
+        //     .catch(error => {});
     }
     onChange(e) {
         this.setState({ file: e.target.files[0] });
@@ -35,4 +40,4 @@ class ReactUploadImage extends React.Component {
     }
 }
 
-export default ReactUploadImage;
+export default Test;
