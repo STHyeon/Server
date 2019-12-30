@@ -1,9 +1,10 @@
+//input type=file 일 경우 서버에서 받을 때
 const path = require("path");
 const multer = require("multer");
 const router = require("express").Router();
 
 const storage = multer.diskStorage({
-    destination: "uploads/",
+    // destination: "uploads/",
     filename: function(req, file, cb) {
         cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
     }

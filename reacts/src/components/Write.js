@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import w1 from "../lib/img/writeback1.png";
-import { postWrite } from "../modules/post";
-import { connect } from "react-redux";
 
 const Write = props => {
+    const [username, setUsername] = useState(localStorage.getItem("username"));
+    const [content, setContent] = useState("");
+    const [img, setC_img] = useState(null);
     let image;
     const Capture = () => {
         html2canvas(document.getElementById("capture")).then(function(canvas) {
             image = canvas.toDataURL("image/png");
+            setC_img(image);
         });
     };
-
-    const [username, setUsername] = useState(localStorage.getItem("username"));
-    const [content, setContent] = useState("");
-    const [img, setC_img] = useState(null);
 
     const formData = new FormData();
     formData.append("img", img);
@@ -23,6 +21,7 @@ const Write = props => {
 
     const handlePost = e => {
         e.preventDefault();
+        Capture();
         props.onPost(formData);
     };
 
@@ -54,20 +53,7 @@ const Write = props => {
                             onChange={({ target: { value } }) => setContent(value)}
                         ></textarea>
                     </div>
-                    <input
-                        type="file"
-                        name="img"
-                        onChange={({ target: { files } }) => setC_img(files[0])}
-                    />
-                    <button
-                        type="submit"
-                        // onClick={() => {
-                        //     // Capture();
-                        //     handlePost();
-                        // }}
-                    >
-                        올리기
-                    </button>
+                    <button type="submit">올리기</button>
                 </form>
             </div>
         </div>

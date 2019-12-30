@@ -1,19 +1,32 @@
 const router = require("express").Router();
 const Post = require("../models/post");
 const multer = require("multer");
-// const upload = multer({ dest: "uploads/", limits: { fileSize: 5 * 1024 * 1024 } });
-let storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, "uploads/");
-    },
-    filename: function(req, file, callback) {
-        // callback(null, file.originalname);
-        callback(null, "IMAGE-" + Date.now() + file.originalname);
-    }
-});
+const fs = require("fs");
+var path = require("path");
+
+function encode_base64(filename) {
+    const ai = path.join(__dirname, "../public/", filename);
+    let buf = fs.readFileSync(ai);
+    let base64data = buf.toString("base64");
+
+    return base64data;
+}
+
+function decode_base64(base64str, filename) {
+    let buf = Buffer.from(base64str, "base64");
+
+    fs.writeFile(path.join(__dirname, "../public/", filename), buf, function(error) {
+        console.log(buf);
+        if (error) {
+            throw error;
+        } else {
+            console.log("File created from base64 string!");
+            return true;
+        }
+    });
+}
 
 let upload = multer({
-    storage: storage,
     fileFilter: (req, file, callback) => {
         if (
             file.mimetype == "image/png" ||
@@ -36,6 +49,19 @@ router.get("/list", function(req, res) {
     });
 });
 
+router.post("/img", function(req, res) {
+    console.log(req.body);
+    const a = "a.png";
+    const ai = path.join(__dirname, "../public/", req.body.name);
+    let buf = fs.readFileSync(ai);
+    let base64data = buf.toString("base64");
+    // console.log(base64data);
+    // const resImg = encode_base64(req.body);
+    res.status(200).json({
+        showImg: "data:image/png;base64," + base64data
+    });
+});
+
 router.post("/post", upload.single("img"), function(req, res) {
     if (req.body.author < 1 || req.body.content < 1) {
         return res.status(400).json({
@@ -43,10 +69,15 @@ router.post("/post", upload.single("img"), function(req, res) {
         });
     }
 
+    let data = req.body.img;
+    data = data.replace(/data:image\/png;base64,/, "");
+    const file_name = Date.now() + " - " + req.body.username + ".png";
+    //base64 String, "파일 이름"
+    decode_base64(data, file_name);
     let postCreate = new Post({
         author: req.body.username,
         content: req.body.content,
-        img: req.file.path
+        img: file_name
     });
 
     postCreate.save(err => {

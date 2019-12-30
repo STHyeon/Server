@@ -24,3 +24,7 @@ export const apiTest = param => {
     // return base.post("/test/upload", { param });
     return "http://localhost:8080/test/upload";
 };
+
+export const apiImage = param => {
+    return base.post("/post/img", param);
+};

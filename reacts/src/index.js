@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.scss";
-import { App, Login, Register } from "./containers";
+import { App, Login, Register, Test1 } from "./containers";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
@@ -29,7 +29,7 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            {/* <Route path="/test" component={ReactUploadImage} /> */}
+            <Route path="/test" component={Test1} />
         </Router>
     </Provider>,
     document.getElementById("root")

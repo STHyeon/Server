@@ -3,6 +3,6 @@ import Auth from "./Auth";
 import Detail from "./Detail";
 import Write from "./Write";
 import Header from "./Header";
-import Test from "./Test";
+import Test from "./ImgSubmitTest";
 
 export { Main, Auth, Detail, Write, Header, Test };

@@ -3,7 +3,7 @@ import { Context } from "../context/Common";
 import { Detail, Write, Test } from "../components";
 import R2 from "../lib/img/r2.png";
 
-const Main = ({ data, onList, onPost, onImage }) => {
+const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
     const { writeToggle, setIsOpen, detailToggle, setDetailToggle } = useContext(Context);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
@@ -28,23 +28,23 @@ const Main = ({ data, onList, onPost, onImage }) => {
     };
 
     const cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         onList();
-    //     }, 1000);
-    // }, []);
+    useEffect(() => {
+        // setInterval(() => {
+        onList();
+        // }, 1000);
+    }, []);
 
     return (
         <div>
             {detailToggle ? (
                 <div>
-                    <Detail data={detailData} />
+                    <Detail data={detailData} onImage={onImage} imgUrl={imgUrl} />
                 </div>
             ) : null}
 
             {writeToggle ? (
                 <div>
-                    <Write onPost={onPost} onImage={onImage} />
+                    <Write onPost={onPost} />
                 </div>
             ) : null}
             <section className="section1">

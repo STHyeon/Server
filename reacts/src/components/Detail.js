@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import r2 from "../lib/img/r2.png";
 import avatar from "../lib/img/avatar.png";
 import menu from "../lib/img/menu.png";
@@ -7,13 +7,16 @@ import comment from "../lib/img/comment.png";
 import like from "../lib/img/like.png";
 
 const Detail = props => {
-    console.log(props);
+    useEffect(() => {
+        props.onImage(props.data.dataList.img);
+    }, []);
+
     return (
         <div className="detail">
             <div className="detail_img">
                 {/* <img src={r2} /> */}
-                {props.data.dataList.img}
-                <img src={props.data.dataList.img} alt="글사진" />
+                {/* {props.data.dataList.img} */}
+                <img src={props.imgUrl} alt="글사진" />
             </div>
             <div className="detail_content">
                 <div className="detail_person">

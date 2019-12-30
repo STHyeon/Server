@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import auth, { watchLogin, watchRegister } from "./auth";
-import post, { watchList, watchPost } from "./post";
+import post, { watchList, watchPost, watchImage } from "./post";
 
 import { all } from "redux-saga/effects";
 
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
-    yield all([watchLogin(), watchRegister(), watchList(), watchPost()]);
+    yield all([watchLogin(), watchRegister(), watchList(), watchPost(), watchImage()]);
 }
 
 export default rootReducer;

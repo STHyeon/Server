@@ -1,4 +1,6 @@
 import App from "./App";
 import Login from "./Login";
 import Register from "./Register";
-export { App, Login, Register };
+import Test1 from "./receiveImg";
+
+export { App, Login, Register, Test1 };
