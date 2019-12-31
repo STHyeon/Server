@@ -1,0 +1,105 @@
+$inner: "only screen and (max-width: 1180px)";
+$desktop: "only screen and (min-width: 992px)";
+$table: "only screen and (min-width: 768px) and (max-width: 991px)";
+$phone: "only screen and (max-width: 767px)";
+$large_phone: "only screen and (max-width: 460px)";
+$medium_phone: "only screen and (max-width: 380px)";
+$small_phone: "only screen and (max-width: 321px)";
+
+@media #{$inner} {
+    .inner {
+        padding: 0 16px;
+    }
+}
+
+@media #{$phone} {
+    .nav {
+        height: auto;
+
+        .logo {
+            float: initial;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: none;
+        }
+
+        .open_menu {
+            display: block;
+        }
+    }
+
+    .hidden_header {
+        height: 63px;
+    }
+
+    .section1 {
+        .backImg {
+            height: 200px;
+
+            .wrap_text {
+                .wrap_text_box {
+                    .text1 {
+                        font-size: 16px;
+                    }
+
+                    .text2 {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    .section2 {
+        .card {
+            float: initial;
+            width: 70%;
+            margin: 0 auto 10px;
+
+            &:nth-child(3n) {
+                margin-right: inherit;
+            }
+        }
+    }
+
+    .detail {
+        width: 90%;
+
+        .detail_img {
+            float: initial;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .detail_content {
+            padding: initial;
+
+            .detail_person,
+            .detail_comments_box {
+                display: none;
+            }
+
+            .detail_star {
+                background: #ffffff;
+            }
+
+            .detail_text {
+                padding: initial;
+                background: #ffffff;
+            }
+        }
+    }
+}
+
+@media #{$large_phone} {
+    .section2 {
+        .card {
+            width: auto;
+        }
+    }
+}

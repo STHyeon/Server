@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
-import { Detail, Write, Test } from "../components";
+import { Detail, Write } from "../components";
 import R2 from "../lib/img/r2.png";
 
 const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
-    const { writeToggle, setIsOpen, detailToggle, setDetailToggle } = useContext(Context);
+    const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle } = useContext(
+        Context
+    );
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
@@ -36,16 +38,10 @@ const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
 
     return (
         <div>
-            {detailToggle ? (
-                <div>
-                    <Detail data={detailData} onImage={onImage} imgUrl={imgUrl} />
-                </div>
-            ) : null}
+            {detailToggle ? <Detail data={detailData} onImage={onImage} imgUrl={imgUrl} /> : null}
 
             {writeToggle ? (
-                <div>
-                    <Write onPost={onPost} />
-                </div>
+                <Write onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} />
             ) : null}
             <section className="section1">
                 <div className="inner">

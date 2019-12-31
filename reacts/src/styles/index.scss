@@ -1,9 +1,11 @@
+@charset "utf-8";
 @import "./Header.scss";
 @import "./reset.css";
 @import "./Main.scss";
 @import "./Auth.scss";
 @import "./Detail.scss";
 @import "./Write.scss";
+@import "./Media.scss";
 
 @font-face {
     font-family: "baloo";
@@ -26,6 +28,10 @@ body {
 
 .inner {
     position: relative;
-    width: 1180px;
+    max-width: 1180px;
     margin: 0 auto;
+}
+
+.display_none {
+    display: none;
 }

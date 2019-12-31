@@ -21,7 +21,14 @@ const CommonContext = props => {
 
     return (
         <Context.Provider
-            value={{ writeToggle, setIsOpen, detailToggle, setDetailToggle, username }}
+            value={{
+                writeToggle,
+                setWriteToggle,
+                setIsOpen,
+                detailToggle,
+                setDetailToggle,
+                username
+            }}
         >
             {isOpen ? (
                 <div

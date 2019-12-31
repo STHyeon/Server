@@ -21,8 +21,18 @@ const Write = props => {
 
     const handlePost = e => {
         e.preventDefault();
-        Capture();
+        // Capture();
+        // setTimeout(function() {
         props.onPost(formData);
+        props.setWriteToggle(false);
+        props.setIsOpen(false);
+        // }, 3000);
+    };
+
+    const [textHeight, setTextHeight] = useState("");
+    const handleTextArea = e => {
+        setTextHeight(`${e.target.scrollHeight}px`);
+        e.target.style.height = textHeight;
     };
 
     const [T_Image, setT_Image] = useState("");
@@ -30,9 +40,18 @@ const Write = props => {
         <div className="write">
             <div className="inner">
                 <h1>오늘의 글을 써주세요</h1>
-                <div id="capture" className="write_img_box">
-                    <p>{T_Image}</p>
-                    <img src={w1} alt="writeback" />
+                <div className="write_img_box">
+                    <div id="capture">
+                        <div className="input_box">
+                            <textarea
+                                placeholder="사진 속에 들어갈 내용을 써주세요."
+                                value={T_Image}
+                                onChange={({ target: { value } }) => setT_Image(value)}
+                                onKeyDown={handleTextArea}
+                            ></textarea>
+                        </div>
+                        <img src={w1} alt="writeback" />
+                    </div>
                 </div>
                 <form
                     className="write_text_box"
@@ -41,19 +60,15 @@ const Write = props => {
                 >
                     <div className="input_box">
                         <textarea
-                            placeholder="사진 속에 들어갈 내용을 써주세요."
-                            value={T_Image}
-                            onChange={({ target: { value } }) => setT_Image(value)}
-                        ></textarea>
-                    </div>
-                    <div className="input_box">
-                        <textarea
                             placeholder="내용을 작성해주세요."
                             value={content}
                             onChange={({ target: { value } }) => setContent(value)}
                         ></textarea>
+                        <button type="button" onClick={Capture}>
+                            aa
+                        </button>
+                        <button type="submit">올리기</button>
                     </div>
-                    <button type="submit">올리기</button>
                 </form>
             </div>
         </div>

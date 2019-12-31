@@ -50,8 +50,6 @@ router.get("/list", function(req, res) {
 });
 
 router.post("/img", function(req, res) {
-    console.log(req.body);
-    const a = "a.png";
     const ai = path.join(__dirname, "../public/", req.body.name);
     let buf = fs.readFileSync(ai);
     let base64data = buf.toString("base64");

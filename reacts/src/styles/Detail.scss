@@ -3,14 +3,13 @@
     top: 50%;
     left: 50%;
     z-index: 999;
-    width: 50%;
-    height: 50%;
     background: #ffffff;
     transform: translate(-50%, -50%);
 
     .detail_img {
         float: left;
         height: 100%;
+
         img {
             height: 100%;
         }
@@ -18,8 +17,10 @@
 
     .detail_content {
         position: relative;
-        width: 100%;
-        padding: 10px 16px 10px 536px;
+
+        .detail_wrapper {
+            padding: 10px;
+        }
 
         .menu {
             float: right;
@@ -28,11 +29,13 @@
         .detail_person {
             img {
                 display: inline-block;
+                padding-top: 5px;
             }
+
             p {
                 display: inline-block;
                 vertical-align: top;
-                padding: 7px 0px 0px 10px;
+                padding: 7px 160px 0px 10px;
             }
         }
 
@@ -43,6 +46,7 @@
 
         .detail_star {
             width: 100%;
+
             border: {
                 top: 1px solid gray;
                 bottom: 1px solid gray;
@@ -55,10 +59,10 @@
             .detail_contents_box {
                 display: inline-block;
                 width: 50%;
-                padding: {
-                    top: 3px;
-                }
+
+                padding: 5px;
                 border-right: 1px solid gray;
+
                 &:last-child {
                     border: 0;
                 }
@@ -69,6 +73,7 @@
 
                     span {
                         vertical-align: top;
+
                         padding: {
                             top: 20px;
                             left: 10px;
@@ -93,16 +98,20 @@
         }
 
         .detail_comments_box {
+
             span,
             input,
             p {
                 display: inline-block;
             }
+
             .detail_comments_content {
                 padding-top: 5px;
+
                 span {
                     padding-right: 10px;
                 }
+
                 p {
                     vertical-align: top;
                     padding: 5px;
@@ -110,24 +119,40 @@
                 }
             }
 
-            .detail_comments_input {
-                position: fixed;
-                bottom: 0;
-                right: 0;
-                left: 55.7%;
+        }
+
+        .detail_comments_input {
+            position: relative;
+
+            .detail_comments_wrapper {
+                // position: absolute;
+                // top: 123px;
+                // left: 0;
+                // right: 0;
+                padding: 10px 7px;
                 background: #f2f3f5;
-                span {
-                    padding: 10px 5px 5px 10px;
+
+                img {
+                    float: left;
                 }
+
                 input {
-                    display: inline-block;
                     vertical-align: top;
+                    float: right;
                     width: 80%;
-                    margin: 10px;
                     padding: 5px;
                     border-radius: 15px;
+
+                }
+
+                &::after {
+                    display: table;
+                    content: "";
+                    clear: both;
                 }
             }
+
+
         }
     }
 }

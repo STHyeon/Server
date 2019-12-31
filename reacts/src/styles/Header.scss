@@ -1,5 +1,6 @@
 .nav {
     position: fixed;
+    z-index: 999;
     left: 0;
     right: 0;
     height: 90px;
@@ -11,6 +12,14 @@
         width: 72px;
         float: left;
         padding: 20px 0;
+    }
+
+    .side_menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 20px;
+        cursor: pointer;
     }
 
     .navbar {
@@ -36,6 +45,20 @@
                 font-weight: bold;
             }
         }
+    }
+
+    .side_navbar {
+        ul {
+            transform: rotate(180deg);
+
+            li {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    .open_menu {
+        display: none;
     }
 }
 
