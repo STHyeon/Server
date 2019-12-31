@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 function App({ getList, postWrite, postList, username, isLogin, getImage, imgUrl }) {
     const onPost = formData => {
         postWrite(formData);
+        getList();
     };
 
     const onImage = ImgName => {
