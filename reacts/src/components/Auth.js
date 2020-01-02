@@ -43,6 +43,11 @@ const Auth = props => {
                                 <button className="login_button" onClick={handleLogin}>
                                     로그인
                                 </button>
+                                {props.authError ? (
+                                    <p className="authError">{props.authError}</p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
@@ -78,7 +83,7 @@ const Auth = props => {
                                 onChange={({ target: { value } }) => setPassword(value)}
                             />
                             <input
-                                type="password1"
+                                type="password"
                                 className="register_input"
                                 placeholder="비밀번호 확인"
                                 onChange={({ target: { value } }) => setPassword2(value)}

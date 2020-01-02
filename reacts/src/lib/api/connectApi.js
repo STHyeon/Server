@@ -5,11 +5,11 @@ const base = axios.create({
 });
 
 export const apiRegister = param => {
-    return base.post("/auth/register", { param });
+    return base.post("/auth/register", param);
 };
 
 export const apiLogin = param => {
-    return base.post("/auth/login", { param });
+    return base.post("/auth/login", param);
 };
 
 export const apiList = () => {

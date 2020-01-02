@@ -4,11 +4,11 @@ import { Auth } from "../components";
 import { connect } from "react-redux";
 import { postRegister } from "../modules/auth";
 
-const Register = ({ authError, postRegister }) => {
+const Register = ({ history, authError, postRegister }) => {
     const [mode, setMode] = useState(false);
 
     const onRegister = ({ username, password, password2 }) => {
-        postRegister({ username, password, password2 });
+        postRegister({ username, password, password2, history });
     };
 
     return (

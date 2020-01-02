@@ -4,7 +4,7 @@ import { Auth } from "../components";
 import { connect } from "react-redux";
 import { postLogin } from "../modules/auth";
 
-const Login = ({ history, postLogin }) => {
+const Login = ({ history, postLogin, authError }) => {
     const [mode, setMode] = useState(true);
 
     const onLogin = ({ username, password }) => {
@@ -13,11 +13,16 @@ const Login = ({ history, postLogin }) => {
 
     return (
         // <Common>
-        <Auth mode={mode} onLogin={onLogin} />
+        <Auth mode={mode} onLogin={onLogin} authError={authError} />
         // </Common>
     );
 };
 
-export default connect(({ auth }) => ({}), {
-    postLogin
-})(Login);
+export default connect(
+    ({ auth }) => ({
+        authError: auth.auth.message
+    }),
+    {
+        postLogin
+    }
+)(Login);

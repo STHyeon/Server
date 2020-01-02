@@ -15,7 +15,7 @@ app.use(cors());
 app.listen(port, () => console.log(port));
 
 //router
-// app.use("/auth", require("./routes/auth"));
+app.use("/auth", require("./routes/auth"));
 app.use("/post", require("./routes/post"));
 app.use("/test", require("./routes/test"));
 
