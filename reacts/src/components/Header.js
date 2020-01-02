@@ -7,16 +7,14 @@ import { Context } from "../context/Common";
 
 const Header = props => {
     const { username } = useContext(Context);
-    const [side_menu_toggle, setSideToggle] = useState(true);
-    const [side_menu_icon_toggle, setSideIconToggle] = useState(true);
-
     const sideToggle = () => {
-        setSideToggle(!side_menu_toggle);
-        setSideIconToggle(!side_menu_icon_toggle);
+        props.setSideToggle(!props.side_menu_toggle);
+        props.setSideIconToggle(!props.side_menu_icon_toggle);
     };
-    const side_menu_class = side_menu_toggle ? "navbar" : "side_navbar";
-    const side_menu_icon = side_menu_toggle ? "open_menu" : "display_none";
-    const side_menu_icon2 = side_menu_icon_toggle ? "display_none" : "open_menu";
+    const side_menu_class = props.side_menu_toggle ? "navbar" : "side_navbar";
+    const side_menu_icon = props.side_menu_toggle ? "open_menu" : "display_none";
+    const side_menu_icon2 = props.side_menu_icon_toggle ? "display_none" : "open_menu";
+
     return (
         <div>
             <nav className="nav">
@@ -39,7 +37,7 @@ const Header = props => {
                             {username ? (
                                 <div>
                                     <li>
-                                        <span>Logout</span>
+                                        <span onClick={props.postLogout}>Logout</span>
                                     </li>
                                     <li>
                                         <span>{props.username}</span>

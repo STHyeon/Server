@@ -4,9 +4,17 @@ import { Detail, Write } from "../components";
 import R2 from "../lib/img/r2.png";
 
 const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
-    const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle } = useContext(
-        Context
-    );
+    const {
+        writeToggle,
+        setIsOpen,
+        detailToggle,
+        setDetailToggle,
+        setWriteToggle,
+        setSideToggle,
+        setSideIconToggle,
+        side_menu_icon_toggle,
+        side_menu_toggle
+    } = useContext(Context);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
@@ -36,8 +44,15 @@ const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
         // }, 1000);
     }, []);
 
+    const sideToggle = () => {
+        if (!side_menu_icon_toggle) {
+            setSideToggle(!side_menu_toggle);
+            setSideIconToggle(!side_menu_icon_toggle);
+        }
+    };
+
     return (
-        <div>
+        <div onClick={sideToggle}>
             {detailToggle ? <Detail data={detailData} onImage={onImage} imgUrl={imgUrl} /> : null}
 
             {writeToggle ? (

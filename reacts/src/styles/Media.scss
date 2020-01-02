@@ -1,5 +1,5 @@
 $inner: "only screen and (max-width: 1180px)";
-$desktop: "only screen and (min-width: 992px)";
+$desktop: "only screen and (max-width: 1520px)";
 $table: "only screen and (min-width: 768px) and (max-width: 991px)";
 $phone: "only screen and (max-width: 767px)";
 $large_phone: "only screen and (max-width: 460px)";
@@ -9,6 +9,29 @@ $small_phone: "only screen and (max-width: 321px)";
 @media #{$inner} {
     .inner {
         padding: 0 16px;
+    }
+
+    .write {
+        .inner {
+            padding: 0;
+        }
+    }
+}
+
+@media #{$desktop} {
+    .write {
+        .write_text_box {
+            float: none;
+
+            .input_box {
+                padding: 0;
+
+                textarea {
+                    height: auto;
+                    min-height: 90px;
+                }
+            }
+        }
     }
 }
 
@@ -27,6 +50,10 @@ $small_phone: "only screen and (max-width: 321px)";
         }
 
         .open_menu {
+            display: block;
+        }
+
+        .side_menu {
             display: block;
         }
     }
@@ -62,6 +89,12 @@ $small_phone: "only screen and (max-width: 321px)";
             &:nth-child(3n) {
                 margin-right: inherit;
             }
+        }
+    }
+
+    .write {
+        h1 {
+            font-size: 20px;
         }
     }
 
@@ -101,5 +134,37 @@ $small_phone: "only screen and (max-width: 321px)";
         .card {
             width: auto;
         }
+    }
+
+    .write {
+        .write_img_box {
+            img {
+                width: 315px;
+            }
+
+            .input_box {
+                textarea {
+                    width: 100%;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media #{$small_phone} {
+
+    .write {
+        .write_img_box {
+
+            img {
+                width: 270px;
+            }
+        }
+
+        .write_text_box {
+            position: static;
+        }
+
     }
 }

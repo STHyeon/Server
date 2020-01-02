@@ -9,7 +9,7 @@ const CommonContext = props => {
     //     isLogin: props.isLogin
     // };
 
-    const { username, isLogin } = props;
+    const { username, isLogin, postLogout } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [writeToggle, setWriteToggle] = useState(false);
@@ -18,6 +18,8 @@ const CommonContext = props => {
         setWriteToggle(!writeToggle);
         setIsOpen(!isOpen);
     };
+    const [side_menu_toggle, setSideToggle] = useState(true);
+    const [side_menu_icon_toggle, setSideIconToggle] = useState(true);
 
     return (
         <Context.Provider
@@ -27,7 +29,11 @@ const CommonContext = props => {
                 setIsOpen,
                 detailToggle,
                 setDetailToggle,
-                username
+                username,
+                setSideToggle,
+                side_menu_toggle,
+                side_menu_icon_toggle,
+                setSideIconToggle
             }}
         >
             {isOpen ? (
@@ -40,7 +46,15 @@ const CommonContext = props => {
                     }}
                 ></div>
             ) : null}
-            <Header onToggle={handleToggle} username={username} />
+            <Header
+                onToggle={handleToggle}
+                username={username}
+                side_menu_toggle={side_menu_toggle}
+                setSideToggle={setSideToggle}
+                side_menu_icon_toggle={side_menu_icon_toggle}
+                setSideIconToggle={setSideIconToggle}
+                postLogout={postLogout}
+            />
             {props.children}
         </Context.Provider>
     );

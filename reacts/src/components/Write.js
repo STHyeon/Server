@@ -63,6 +63,7 @@ const Write = props => {
                             placeholder="내용을 작성해주세요."
                             value={content}
                             onChange={({ target: { value } }) => setContent(value)}
+                            onKeyDown={handleTextArea}
                         ></textarea>
                         <button type="button" onClick={Capture}>
                             aa
