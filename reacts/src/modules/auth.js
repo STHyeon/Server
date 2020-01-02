@@ -21,6 +21,7 @@ function* postRegisterSaga(action) {
             payload: resRegister
         });
     } catch (err) {
+        console.log(err);
         yield put({
             type: POST_REGISTER_FAILURE,
             payload: err,
@@ -67,6 +68,31 @@ function* postLoginSaga(action) {
 
 export function* watchLogin() {
     yield takeLatest(POST_LOGIN, postLoginSaga);
+}
+
+const POST_LOGOUT = "POST_LOGOUT";
+const POST_LOGOUT_SUCCESE = "POST_LOGOUT_SUCCESS";
+const POST_LOGOUT_FAILURE = "POST_LOGOUT_FAILURE";
+
+export const postLogout = createAction(POST_LOGOUT);
+
+export function* postLogoutSaga() {
+    try {
+        localStorage.removeItem("username");
+        localStorage.removeItem("token");
+        yield put({
+            type: POST_LOGOUT_SUCCESE
+        });
+    } catch (err) {
+        yield put({
+            type: POST_LOGOUT_FAILURE,
+            payload: err
+        });
+    }
+}
+
+export function* watchLogout() {
+    yield takeLatest(POST_LOGOUT, postLogoutSaga);
 }
 
 const initialState = {

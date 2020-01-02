@@ -39,8 +39,12 @@ router.post("/register", function(req, res) {
         req.body.param.password < 1 ||
         req.body.param.password2 < 1
     ) {
-        return res.status(400).json({
-            error: "빈칸을 채워주세요."
+        // return res.status(400).json({
+        //     error: "빈칸을 채워주세요."
+        // });
+        return res.status(401).json({
+            error: "NOT USER",
+            code: 1
         });
     }
 
