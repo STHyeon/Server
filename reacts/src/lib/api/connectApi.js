@@ -28,3 +28,7 @@ export const apiTest = param => {
 export const apiImage = param => {
     return base.post("/post/img", param);
 };
+
+export const apiDelete = param => {
+    return base.post("/post/delete", param);
+};

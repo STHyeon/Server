@@ -8,10 +8,10 @@ const port = process.env.PORT || 8080;
 const mongo_url = "mongodb://localhost/road";
 const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(path.join(__dirname, "public")));
 app.listen(port, () => console.log(port));
 
 //router

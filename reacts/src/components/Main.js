@@ -2,21 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
 import { Detail, Write } from "../components";
 
-const Main = ({ data, onList, onPost, username }) => {
-    const {
-        writeToggle,
-        setIsOpen,
-        detailToggle,
-        setDetailToggle,
-        setWriteToggle,
-        setSideToggle,
-        setSideIconToggle,
-        side_menu_icon_toggle,
-        side_menu_toggle
-    } = useContext(Context);
+const Main = ({ data, onList, onPost, username, onDelete }) => {
+    const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle, setSideToggle, setSideIconToggle, side_menu_icon_toggle, side_menu_toggle } = useContext(Context);
+
     useEffect(() => {
         onList();
     }, []);
+
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
@@ -57,16 +49,9 @@ const Main = ({ data, onList, onPost, username }) => {
 
     return (
         <div onClick={sideToggle}>
-            {detailToggle ? <Detail data={detailData} /> : null}
+            {detailToggle ? <Detail data={detailData} onDelete={onDelete} setDetailToggle={setDetailToggle} setIsOpen={setIsOpen} /> : null}
 
-            {writeToggle ? (
-                <Write
-                    onPost={onPost}
-                    setWriteToggle={setWriteToggle}
-                    setIsOpen={setIsOpen}
-                    username={username}
-                />
-            ) : null}
+            {writeToggle ? <Write onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} username={username} /> : null}
             <section className="section1">
                 <div className="inner">
                     <div className="backImg">

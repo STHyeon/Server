@@ -55,16 +55,39 @@ export function* watchPost() {
     yield takeLatest(POST_WRITE, postWriteSaga);
 }
 
+const POST_DELETE = "POST_DELETE";
+const POST_DELETE_SUCCESS = "POST_DELETE_SUCCESS";
+const POST_DELETE_FAILURE = "POST_DELETE_FAILURE";
+
+export const postDelete = createAction(POST_DELETE, ({ imgId }) => ({ imgId }));
+
+export function* postDeleteSaga(action) {
+    try {
+        const resDelete = yield call(api.apiDelete, action.payload);
+        yield put({
+            type: POST_DELETE_SUCCESS,
+            payload: resDelete
+        });
+    } catch (err) {
+        yield put({
+            type: POST_WRITE_FAILURE,
+            payload: err
+        });
+    }
+}
+
+export function* watchDelete() {
+    yield takeLatest(POST_DELETE, postDeleteSaga);
+}
+
 const initialState = {
     list: {
         status: "INIT",
         postList: [],
         error: ""
     },
-    write: {
-        status: "INIT",
-        error: ""
-    }
+    status: "INIT",
+    error: ""
 };
 
 const post = handleActions(
@@ -80,21 +103,26 @@ const post = handleActions(
             ...state,
             list: {
                 status: "GET_LIST_FAILURE",
-                error: "갑작스런 오류"
+                error: "서버 오류"
             }
         }),
         [POST_WRITE_SUCCESS]: (state, action) => ({
             ...state,
-            write: {
-                status: "POST_WRITE_SUCCESS"
-            }
+            status: "POST_WRITE_SUCCESS"
         }),
         [POST_WRITE_FAILURE]: (state, action) => ({
             ...state,
-            write: {
-                status: "POST_WRITE_FAILURE",
-                error: action.payload
-            }
+            status: "POST_WRITE_FAILURE",
+            error: action.payload.response.data.error
+        }),
+        [POST_DELETE_SUCCESS]: (state, action) => ({
+            ...state,
+            status: "POST_DELETE_SUCCESS"
+        }),
+        [POST_DELETE_FAILURE]: (state, action) => ({
+            ...state,
+            status: "POST_DELETE_FAILURE",
+            error: action.payload.response.data.error
         })
     },
     initialState

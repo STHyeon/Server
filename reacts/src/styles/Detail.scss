@@ -24,12 +24,22 @@
 
         .menu {
             float: right;
+            cursor: pointer;
+
+            .optionMenu {
+                li {
+                    text-align: center;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
 
         .detail_person {
             img {
                 display: inline-block;
-                padding-top: 5px;
+                padding: 5px 15px 0 0;
             }
 
             p {
@@ -98,7 +108,6 @@
         }
 
         .detail_comments_box {
-
             span,
             input,
             p {
@@ -118,7 +127,6 @@
                     background: #f2f3f5;
                 }
             }
-
         }
 
         .detail_comments_input {
@@ -142,7 +150,6 @@
                     width: 80%;
                     padding: 5px;
                     border-radius: 15px;
-
                 }
 
                 &::after {
@@ -151,8 +158,6 @@
                     clear: both;
                 }
             }
-
-
         }
     }
 }

@@ -20,11 +20,7 @@ function decode_base64(base64str, filename) {
 
 let upload = multer({
     fileFilter: (req, file, callback) => {
-        if (
-            file.mimetype == "image/png" ||
-            file.mimetype == "image/jpg" ||
-            file.mimetype == "image/jpeg"
-        ) {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
             callback(null, true);
         } else {
             return callback(new Error("only.png, .jpg, .jpeg"));
@@ -64,12 +60,36 @@ router.post("/post", upload.single("img"), function(req, res) {
     let postCreate = new Post({
         author: req.body.username,
         content: req.body.content,
-        img: file_name
+        img: file_name,
+        origin: file_name
     });
 
     postCreate.save(err => {
         if (err) throw err;
         return res.json({ success: postCreate });
+    });
+});
+
+router.post("/delete", function(req, res) {
+    Post.deleteOne({ origin: req.body.imgId }, function(err, result) {
+        if (err) throw err;
+        if (!result) {
+            return res.status(404).json({
+                error: "데이터가 없음"
+            });
+        }
+
+        const imgPath = path.join(__dirname, "../public/", req.body.imgId);
+
+        try {
+            fs.unlinkSync(imgPath);
+        } catch (err) {
+            console.log(err);
+        }
+
+        return res.status(200).json({
+            success: true
+        });
     });
 });
 

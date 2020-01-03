@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import avatar from "../lib/img/avatar.png";
 import menu from "../lib/img/menu.png";
 import thumb from "../lib/img/thumbs.png";
@@ -6,6 +6,17 @@ import comment from "../lib/img/comment.png";
 import like from "../lib/img/like.png";
 
 const Detail = props => {
+    const [openMenu, setOpenMenu] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
+
+    const Alert = () => {
+        return (
+            <div>
+                <p>a</p>
+            </div>
+        );
+    };
+
     return (
         <div className="detail">
             <div className="detail_img">
@@ -16,7 +27,29 @@ const Detail = props => {
                     <div className="detail_person">
                         <img src={avatar} alt="유저" />
                         <p>{props.data.dataList.author}</p>
-                        <img src={menu} alt="메뉴" className="menu" />
+                        <div className="menu">
+                            <img
+                                src={menu}
+                                alt="메뉴"
+                                onClick={() => {
+                                    setOpenMenu(!openMenu);
+                                }}
+                            />
+                            <ul className={openMenu ? "optionMenu" : "display_none"}>
+                                <li>수정</li>
+                                <li
+                                    onClick={() => {
+                                        props.onDelete(props.data.dataList.origin);
+                                        setTimeout(() => {
+                                            props.setIsOpen(false);
+                                            props.setDetailToggle(false);
+                                        }, 500);
+                                    }}
+                                >
+                                    삭제
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div className="detail_text">
                         <p>{props.data.dataList.content}</p>
