@@ -36,6 +36,7 @@
             }
 
             .link {
+                position: static;
                 margin: 0 24px;
                 padding: 5px 50px;
                 border: 2px solid #ffffff;
@@ -117,8 +118,9 @@
 
         .input_box {
             position: absolute;
-            top: -50px;
-            left: 140px;
+            top: 18%;
+            left: 25%;
+            transform: translate(-13%, -25%);
             width: 70%;
             height: 500px;
             padding: 30px 50px;

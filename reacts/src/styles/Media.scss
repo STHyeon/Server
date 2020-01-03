@@ -1,5 +1,5 @@
-$inner: "only screen and (max-width: 1180px)";
 $desktop: "only screen and (max-width: 1520px)";
+$inner: "only screen and (max-width: 1180px)";
 $table: "only screen and (min-width: 768px) and (max-width: 991px)";
 $phone: "only screen and (max-width: 767px)";
 $large_phone: "only screen and (max-width: 460px)";
@@ -16,6 +16,22 @@ $small_phone: "only screen and (max-width: 321px)";
             padding: 0;
         }
     }
+
+    .login {
+        .brown {
+            .login_contain {
+                width: 60%;
+            }
+
+            .register_box {
+                padding: 100px 27px;
+
+                .text1 {
+                    font-size: 35px;
+                }
+            }
+        }
+    }
 }
 
 @media #{$desktop} {
@@ -29,6 +45,22 @@ $small_phone: "only screen and (max-width: 321px)";
                 textarea {
                     height: auto;
                     min-height: 90px;
+                }
+            }
+        }
+    }
+}
+
+@media #{$table} {
+    .login {
+        .brown {
+            .login_contain {
+                padding: 80px 50px;
+            }
+
+            .register_box {
+                .text2 {
+                    font-size: 18px;
                 }
             }
         }
@@ -127,6 +159,48 @@ $small_phone: "only screen and (max-width: 321px)";
             }
         }
     }
+
+    //auth
+
+    .login {
+        .brown {
+            .register_box {
+                position: relative;
+                float: unset;
+                padding: 16px;
+
+                .text1 {
+                    font-size: 20px;
+                }
+
+                .text2 {
+                    font-size: 16px;
+                }
+
+                .link {
+                    position: absolute;
+                    top: 55px;
+                    right: 0;
+                }
+            }
+
+            .login_contain {
+                position: static;
+                top: unset;
+                right: unset;
+                float: unset;
+                width: auto;
+                height: auto;
+                padding: 75px 47px;
+            }
+        }
+    }
+
+    .register_container {
+        .brown {
+            width: 100%;
+        }
+    }
 }
 
 @media #{$large_phone} {
@@ -150,13 +224,49 @@ $small_phone: "only screen and (max-width: 321px)";
             }
         }
     }
+
+    .login {
+        .brown {
+            .register_box {
+                .text2 {
+                    padding: 0 0 17px;
+                }
+
+                .link {
+                    position: static;
+                    margin: 0;
+                    font-size: 15px;
+                }
+            }
+
+            .login_contain {
+                padding: 35px 25px;
+
+                .login_box {
+                    margin-top: 20px;
+
+                    .login_button {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    .register_container {
+        .brown {
+            .input_box {
+                transform: translate(-22%, -24%);
+                width: 90%;
+                padding: 74px 16px;
+            }
+        }
+    }
 }
 
 @media #{$small_phone} {
-
     .write {
         .write_img_box {
-
             img {
                 width: 270px;
             }
@@ -165,6 +275,5 @@ $small_phone: "only screen and (max-width: 321px)";
         .write_text_box {
             position: static;
         }
-
     }
 }
