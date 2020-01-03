@@ -55,32 +55,6 @@ export function* watchPost() {
     yield takeLatest(POST_WRITE, postWriteSaga);
 }
 
-const GET_IMAGE = "GET_IMAGE";
-const GET_IMAGE_SUCCESS = "GET_IMAGE_SUCCESS";
-const GET_IMAGE_FAILURE = "GET_IMAGE_FAILURE";
-
-export const getImage = createAction(GET_IMAGE);
-
-export function* getImageSaga(action) {
-    try {
-        const resImage = yield call(api.apiImage, action.payload);
-        yield put({
-            type: GET_IMAGE_SUCCESS,
-            payload: resImage
-        });
-    } catch (err) {
-        yield put({
-            type: GET_IMAGE_FAILURE,
-            payload: err,
-            error: true
-        });
-    }
-}
-
-export function* watchImage() {
-    yield takeLatest(GET_IMAGE, getImageSaga);
-}
-
 const initialState = {
     list: {
         status: "INIT",
@@ -90,10 +64,6 @@ const initialState = {
     write: {
         status: "INIT",
         error: ""
-    },
-    img: {
-        status: "INIT",
-        imgUrl: ""
     }
 };
 
@@ -123,20 +93,6 @@ const post = handleActions(
             ...state,
             write: {
                 status: "POST_WRITE_FAILURE",
-                error: action.payload
-            }
-        }),
-        [GET_IMAGE_SUCCESS]: (state, action) => ({
-            ...state,
-            img: {
-                status: "GET_IMAGE_SUCCESS",
-                imgUrl: action.payload.data.showImg
-            }
-        }),
-        [GET_IMAGE_FAILURE]: (state, action) => ({
-            ...state,
-            img: {
-                status: "GET_IMAGE_FAILURE",
                 error: action.payload
             }
         })

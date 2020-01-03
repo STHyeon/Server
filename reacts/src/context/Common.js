@@ -4,12 +4,7 @@ import { Header } from "../components";
 const Context = createContext(null);
 
 const CommonContext = props => {
-    // const state = {
-    //     username: props.username,
-    //     isLogin: props.isLogin
-    // };
-
-    const { username, isLogin, postLogout } = props;
+    const { username, postLogout, history } = props;
 
     const [isOpen, setIsOpen] = useState(false);
     const [writeToggle, setWriteToggle] = useState(false);
@@ -54,6 +49,7 @@ const CommonContext = props => {
                 side_menu_icon_toggle={side_menu_icon_toggle}
                 setSideIconToggle={setSideIconToggle}
                 postLogout={postLogout}
+                history={history}
             />
             {props.children}
         </Context.Provider>

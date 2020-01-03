@@ -1,7 +1,6 @@
 import React from "react";
-import * as api from "../lib/api/connectApi";
 
-const axios = require("axios");
+// const axios = require("axios");
 
 class Test extends React.Component {
     constructor(props) {

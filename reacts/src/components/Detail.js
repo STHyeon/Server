@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import r2 from "../lib/img/r2.png";
+import React from "react";
 import avatar from "../lib/img/avatar.png";
 import menu from "../lib/img/menu.png";
 import thumb from "../lib/img/thumbs.png";
@@ -7,14 +6,10 @@ import comment from "../lib/img/comment.png";
 import like from "../lib/img/like.png";
 
 const Detail = props => {
-    useEffect(() => {
-        props.onImage(props.data.dataList.img);
-    }, []);
-
     return (
         <div className="detail">
             <div className="detail_img">
-                <img src={props.imgUrl} alt="글사진" />
+                <img src={props.data.dataList.img} alt="글사진" />
             </div>
             <div className="detail_content">
                 <div className="detail_wrapper">
@@ -36,7 +31,7 @@ const Detail = props => {
                         </div>
                         <div className="detail_contents_box">
                             <p>
-                                <img src={comment} alth="comment" />
+                                <img src={comment} alt="comment" />
                                 <span>33</span>
                             </p>
                         </div>

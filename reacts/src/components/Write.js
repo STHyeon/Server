@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import w1 from "../lib/img/writeback1.png";
+import w2 from "../lib/img/writeback2.png";
+import w3 from "../lib/img/writeback3.png";
 
 const Write = props => {
-    const [username, setUsername] = useState(localStorage.getItem("username"));
+    const [username] = useState(props.username);
     const [content, setContent] = useState("");
     const [img, setC_img] = useState(null);
     let image;
@@ -35,11 +37,26 @@ const Write = props => {
         e.target.style.height = textHeight;
     };
 
+    const randomNum = () => {
+        const min = Math.ceil(0);
+        const max = Math.floor(3);
+        return Math.floor(Math.random() * (max - min)) + min; // 최댓값 제외 , 최솟값 포함
+    };
+
+    const [randomRes, setRandomRes] = useState(0);
+    let imgList = [w1, w2, w3];
+
+    useEffect(() => {
+        setRandomRes(randomNum());
+    }, []);
+
     const [T_Image, setT_Image] = useState("");
     return (
         <div className="write">
             <div className="inner">
-                <h1>오늘의 글을 써주세요</h1>
+                <h1>
+                    오늘의 글을 써주세요 <span>(사진은 랜덤입니다.)</span>
+                </h1>
                 <div className="write_img_box">
                     <div id="capture">
                         <div className="input_box">
@@ -50,7 +67,7 @@ const Write = props => {
                                 onKeyDown={handleTextArea}
                             ></textarea>
                         </div>
-                        <img src={w1} alt="writeback" />
+                        <img src={imgList[randomRes]} alt="writeback" />
                     </div>
                 </div>
                 <form
@@ -66,7 +83,7 @@ const Write = props => {
                             onKeyDown={handleTextArea}
                         ></textarea>
                         <button type="button" onClick={Capture}>
-                            aa
+                            임시 캡쳐
                         </button>
                         <button type="submit">올리기</button>
                     </div>

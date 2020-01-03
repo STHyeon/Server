@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as api from "../lib/api/connectApi";
 
 const axios = require("axios");
 

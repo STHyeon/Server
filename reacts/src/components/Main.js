@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
 import { Detail, Write } from "../components";
-import R2 from "../lib/img/r2.png";
 
-const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
+const Main = ({ data, onList, onPost, username }) => {
     const {
         writeToggle,
         setIsOpen,
@@ -15,6 +14,9 @@ const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
         side_menu_icon_toggle,
         side_menu_toggle
     } = useContext(Context);
+    useEffect(() => {
+        onList();
+    }, []);
     const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
@@ -26,23 +28,25 @@ const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
                     setDetailData(props);
                 }}
             >
-                <div className="card-img">
-                    <img src={R2} alt="card-img" />
-                </div>
-                <div className="card-tag">태그</div>
-                <div className="card-title">
-                    <p>{props.dataList.title}</p>
-                </div>
+                <span>
+                    <span>
+                        <div className="card-img">
+                            <img src={props.dataList.img} alt="card-img" />
+                        </div>
+                        <div className="card-tag">태그</div>
+                        <div className="card-title">
+                            <p>{props.dataList.title}</p>
+                        </div>
+                    </span>
+                </span>
             </div>
         );
     };
+    let cardMap;
 
-    const cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
-    useEffect(() => {
-        // setInterval(() => {
-        onList();
-        // }, 1000);
-    }, []);
+    if (data) {
+        cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
+    }
 
     const sideToggle = () => {
         if (!side_menu_icon_toggle) {
@@ -53,10 +57,15 @@ const Main = ({ data, onList, onPost, onImage, imgUrl }) => {
 
     return (
         <div onClick={sideToggle}>
-            {detailToggle ? <Detail data={detailData} onImage={onImage} imgUrl={imgUrl} /> : null}
+            {detailToggle ? <Detail data={detailData} /> : null}
 
             {writeToggle ? (
-                <Write onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} />
+                <Write
+                    onPost={onPost}
+                    setWriteToggle={setWriteToggle}
+                    setIsOpen={setIsOpen}
+                    username={username}
+                />
             ) : null}
             <section className="section1">
                 <div className="inner">

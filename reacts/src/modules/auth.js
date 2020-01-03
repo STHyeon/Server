@@ -129,7 +129,7 @@ const auth = handleActions(
             ...state,
             auth: {
                 status: "LOGIN_FAILURE",
-                // message: action.payload.response.data.error,
+                message: action.payload.response.data.error,
                 error: true
             }
         }),

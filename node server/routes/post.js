@@ -4,23 +4,15 @@ const multer = require("multer");
 const fs = require("fs");
 var path = require("path");
 
-function encode_base64(filename) {
-    const ai = path.join(__dirname, "../public/", filename);
-    let buf = fs.readFileSync(ai);
-    let base64data = buf.toString("base64");
-
-    return base64data;
-}
-
 function decode_base64(base64str, filename) {
     let buf = Buffer.from(base64str, "base64");
 
     fs.writeFile(path.join(__dirname, "../public/", filename), buf, function(error) {
-        console.log(buf);
+        // console.log(buf);
         if (error) {
             throw error;
         } else {
-            console.log("File created from base64 string!");
+            // console.log("File created from base64 string!");
             return true;
         }
     });
@@ -43,20 +35,17 @@ let upload = multer({
 router.get("/list", function(req, res) {
     Post.find({}, (err, list) => {
         if (err) throw err;
+
+        for (const i in list) {
+            const ai = path.join(__dirname, "../public/", list[i].img);
+            let buf = fs.readFileSync(ai);
+            let base64data = buf.toString("base64");
+            list[i].img = "data:image/png;base64," + base64data;
+        }
+
         return res.json({
             list: list
         });
-    });
-});
-
-router.post("/img", function(req, res) {
-    const ai = path.join(__dirname, "../public/", req.body.name);
-    let buf = fs.readFileSync(ai);
-    let base64data = buf.toString("base64");
-    // console.log(base64data);
-    // const resImg = encode_base64(req.body);
-    res.status(200).json({
-        showImg: "data:image/png;base64," + base64data
     });
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import logo from "../lib/img/logo.png";
 import menu from "../lib/img/menu.png";
 import cancel from "../lib/img/cancel.png";
@@ -31,9 +31,10 @@ const Header = props => {
                     <div className={side_menu_class}>
                         <div></div>
                         <ul>
-                            <li>
+                            <li>{username ? <span onClick={props.onToggle}>WRITE</span> : null}</li>
+                            {/* <li>
                                 <span onClick={props.onToggle}>WRITE</span>
-                            </li>
+                            </li> */}
                             {username ? (
                                 <div>
                                     <li>
