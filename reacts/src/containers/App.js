@@ -3,10 +3,10 @@ import { CommonContext } from "../context/Common";
 import { Main } from "../components";
 
 import { postLogout } from "../modules/auth";
-import { getList, postWrite, postDelete } from "../modules/post";
+import { getList, postWrite, postDelete, postModify } from "../modules/post";
 import { connect } from "react-redux";
 
-function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history }) {
+function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history, postModify }) {
     const onPost = formData => {
         postWrite(formData);
         getList();
@@ -19,10 +19,15 @@ function App({ getList, postWrite, postList, postDelete, username, isLogin, post
         }, 1000);
     };
 
+    const onModify = formData => {
+        postModify(formData);
+        getList();
+    };
+
     return (
         <div className="wrap">
             <CommonContext username={username} isLogin={isLogin} postLogout={postLogout} history={history}>
-                <Main data={postList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} />
+                <Main data={postList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} onModify={onModify} />
             </CommonContext>
         </div>
     );
@@ -38,6 +43,7 @@ export default connect(
         getList,
         postWrite,
         postLogout,
-        postDelete
+        postDelete,
+        postModify
     }
 )(App);

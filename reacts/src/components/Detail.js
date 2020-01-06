@@ -36,7 +36,14 @@ const Detail = props => {
                                 }}
                             />
                             <ul className={openMenu ? "optionMenu" : "display_none"}>
-                                <li>수정</li>
+                                <li
+                                    onClick={() => {
+                                        props.setFormMode(false);
+                                        props.setWriteToggle(true);
+                                    }}
+                                >
+                                    수정
+                                </li>
                                 <li
                                     onClick={() => {
                                         props.onDelete(props.data.dataList.origin);

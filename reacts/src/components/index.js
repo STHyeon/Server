@@ -1,8 +1,8 @@
 import Main from "./Main";
 import Auth from "./Auth";
 import Detail from "./Detail";
-import Write from "./Write";
+import Form from "./Form";
 import Header from "./Header";
 import Test from "./ImgSubmitTest";
 
-export { Main, Auth, Detail, Write, Header, Test };
+export { Main, Auth, Detail, Form, Header, Test };

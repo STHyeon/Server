@@ -80,6 +80,33 @@ export function* watchDelete() {
     yield takeLatest(POST_DELETE, postDeleteSaga);
 }
 
+const POST_MODIFY = "POST_MODIFY";
+const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS";
+const POST_MODIFY_FAILURE = "POST_MODIFY_FAILURE";
+
+export const postModify = createAction(POST_MODIFY, formData => formData);
+
+export function* postModifySaga(action) {
+    console.log(action);
+    const resModify = yield call(api.apiModify, action.payload);
+    console.log(resModify);
+    try {
+        yield put({
+            type: POST_MODIFY_SUCCESS,
+            payload: resModify
+        });
+    } catch (err) {
+        yield put({
+            type: POST_MODIFY_FAILURE,
+            payload: err
+        });
+    }
+}
+
+export function* watchModify() {
+    yield takeLatest(POST_MODIFY, postModifySaga);
+}
+
 const initialState = {
     list: {
         status: "INIT",
@@ -122,6 +149,15 @@ const post = handleActions(
         [POST_DELETE_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_DELETE_FAILURE",
+            error: action.payload.response.data.error
+        }),
+        [POST_MODIFY_SUCCESS]: (state, action) => ({
+            ...state,
+            status: "POST_MODIFY_SUCCESS"
+        }),
+        [POST_MODIFY_FAILURE]: (state, action) => ({
+            ...state,
+            status: "POST_MODIFY_FAILURE",
             error: action.payload.response.data.error
         })
     },

@@ -61,7 +61,9 @@ router.post("/post", upload.single("img"), function(req, res) {
         author: req.body.username,
         content: req.body.content,
         img: file_name,
-        origin: file_name
+        origin: file_name,
+        img_num: req.body.img_num,
+        img_text: req.body.img_text
     });
 
     postCreate.save(err => {
@@ -79,6 +81,7 @@ router.post("/delete", function(req, res) {
             });
         }
 
+        //파일 삭제
         const imgPath = path.join(__dirname, "../public/", req.body.imgId);
 
         try {
@@ -89,6 +92,43 @@ router.post("/delete", function(req, res) {
 
         return res.status(200).json({
             success: true
+        });
+    });
+});
+
+router.post("/modify", upload.single("img"), function(req, res) {
+    Post.findOne({ _id: req.body.id }, (err, result) => {
+        if (err) throw err;
+        if (!result) {
+            return res.status(404).json({
+                error: "데이터가 없습니다."
+            });
+        }
+
+        let data = req.body.img;
+        data = data.replace(/data:image\/png;base64,/, "");
+        const file_name = Date.now() + " - " + req.body.username + ".png";
+        //base64 String, "파일 이름"
+        decode_base64(data, file_name);
+
+        const imgPath = path.join(__dirname, "../public/", result.origin);
+
+        try {
+            fs.unlinkSync(imgPath);
+        } catch (err) {
+            console.log(err);
+        }
+
+        result.content = req.body.content;
+        result.img = file_name;
+        result.origin = file_name;
+        result.img_text = req.body.img_text;
+
+        result.save(function(err) {
+            if (err) throw err;
+            return res.status(200).json({
+                success: true
+            });
         });
     });
 });

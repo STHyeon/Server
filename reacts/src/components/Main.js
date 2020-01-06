@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
-import { Detail, Write } from "../components";
+import { Detail, Form } from "../components";
 
-const Main = ({ data, onList, onPost, username, onDelete }) => {
-    const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle, setSideToggle, setSideIconToggle, side_menu_icon_toggle, side_menu_toggle } = useContext(Context);
+const Main = ({ data, onList, onPost, username, onDelete, onModify }) => {
+    const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle, setSideToggle, setSideIconToggle, side_menu_icon_toggle, side_menu_toggle, formMode, setFormMode } = useContext(
+        Context
+    );
 
     useEffect(() => {
         onList();
@@ -17,6 +19,7 @@ const Main = ({ data, onList, onPost, username, onDelete }) => {
                 onClick={() => {
                     setIsOpen(true);
                     setDetailToggle(true);
+                    setFormMode(true);
                     setDetailData(props);
                 }}
             >
@@ -49,9 +52,13 @@ const Main = ({ data, onList, onPost, username, onDelete }) => {
 
     return (
         <div onClick={sideToggle}>
-            {detailToggle ? <Detail data={detailData} onDelete={onDelete} setDetailToggle={setDetailToggle} setIsOpen={setIsOpen} /> : null}
+            {detailToggle ? (
+                formMode ? (
+                    <Detail data={detailData} onDelete={onDelete} setDetailToggle={setDetailToggle} setIsOpen={setIsOpen} setFormMode={setFormMode} setWriteToggle={setWriteToggle} />
+                ) : null
+            ) : null}
 
-            {writeToggle ? <Write onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} username={username} /> : null}
+            {writeToggle ? <Form onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} username={username} formMode={formMode} setFormMode={setFormMode} data={detailData} onModify={onModify} setDetailToggle={setDetailToggle} /> : null}
             <section className="section1">
                 <div className="inner">
                     <div className="backImg">

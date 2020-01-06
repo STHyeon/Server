@@ -6,6 +6,7 @@ const Context = createContext(null);
 const CommonContext = props => {
     const { username, postLogout, history } = props;
 
+    const [formMode, setFormMode] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
     const [writeToggle, setWriteToggle] = useState(false);
     const [detailToggle, setDetailToggle] = useState(false);
@@ -28,7 +29,9 @@ const CommonContext = props => {
                 setSideToggle,
                 side_menu_toggle,
                 side_menu_icon_toggle,
-                setSideIconToggle
+                setSideIconToggle,
+                formMode,
+                setFormMode
             }}
         >
             {isOpen ? (
@@ -38,6 +41,7 @@ const CommonContext = props => {
                         setIsOpen(false);
                         setWriteToggle(false);
                         setDetailToggle(false);
+                        setFormMode(true);
                     }}
                 ></div>
             ) : null}

@@ -5,7 +5,9 @@ const postSchema = new mongoose.Schema({
     author: { type: String },
     content: { type: String },
     img: { type: String },
-    origin: { type: String }
+    origin: { type: String },
+    img_num: { type: Number },
+    img_text: { type: String }
 });
 
 module.exports = mongoose.model("post", postSchema);

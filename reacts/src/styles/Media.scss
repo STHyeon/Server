@@ -36,6 +36,10 @@ $small_phone: "only screen and (max-width: 321px)";
 
 @media #{$desktop} {
     .write {
+        .write_img_box {
+            float: unset;
+        }
+
         .write_text_box {
             float: none;
 

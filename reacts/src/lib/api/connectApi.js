@@ -32,3 +32,7 @@ export const apiImage = param => {
 export const apiDelete = param => {
     return base.post("/post/delete", param);
 };
+
+export const apiModify = param => {
+    return base.post("/post/modify", param);
+};
