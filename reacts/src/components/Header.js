@@ -31,10 +31,10 @@ const Header = props => {
                     <div className={side_menu_class}>
                         <div></div>
                         <ul>
-                            <li>{username ? <span onClick={props.onToggle}>WRITE</span> : null}</li>
-                            {/* <li>
+                            {/* <li>{username ? <span onClick={props.onToggle}>WRITE</span> : null}</li> */}
+                            <li>
                                 <span onClick={props.onToggle}>WRITE</span>
-                            </li> */}
+                            </li>
                             {username ? (
                                 <div>
                                     <li>

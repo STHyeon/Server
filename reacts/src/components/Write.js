@@ -60,30 +60,16 @@ const Write = props => {
                 <div className="write_img_box">
                     <div id="capture">
                         <div className="input_box">
-                            <textarea
-                                placeholder="사진 속에 들어갈 내용을 써주세요."
-                                value={T_Image}
-                                onChange={({ target: { value } }) => setT_Image(value)}
-                                onKeyDown={handleTextArea}
-                            ></textarea>
+                            <textarea placeholder="사진 속에 들어갈 내용을 써주세요." value={T_Image} onChange={({ target: { value } }) => setT_Image(value)} onKeyDown={handleTextArea}></textarea>
                         </div>
                         <img src={imgList[randomRes]} alt="writeback" />
                     </div>
                 </div>
-                <form
-                    className="write_text_box"
-                    encType="multipart/form-data"
-                    onSubmit={handlePost}
-                >
+                <form className="write_text_box" encType="multipart/form-data" onSubmit={handlePost}>
                     <div className="input_box">
-                        <textarea
-                            placeholder="내용을 작성해주세요."
-                            value={content}
-                            onChange={({ target: { value } }) => setContent(value)}
-                            onKeyDown={handleTextArea}
-                        ></textarea>
+                        <textarea placeholder="내용을 작성해주세요." value={content} onChange={({ target: { value } }) => setContent(value)} onKeyDown={handleTextArea}></textarea>
                         <button type="button" onClick={Capture}>
-                            임시 캡쳐
+                            <span>임시 캡쳐</span>
                         </button>
                         <button type="submit">올리기</button>
                     </div>

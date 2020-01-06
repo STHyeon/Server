@@ -3,7 +3,7 @@
     z-index: 9999;
     top: 50%;
     left: 50%;
-    padding: 16px;
+    padding: 5px;
     transform: translate(-50%, -50%);
     background: #293a54;
 
@@ -69,7 +69,7 @@
 
         .input_box {
             width: 100%;
-            padding-left: 16px;
+            padding-left: 5px;
             margin: 0 auto;
 
             textarea {
@@ -80,7 +80,37 @@
             }
 
             button {
+                position: relative;
                 width: 100%;
+                border: none;
+                cursor: pointer;
+                background: #ffffff;
+
+                transition: color 1ms 0.3s;
+
+                &:before,
+                &:after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+
+                    width: 0;
+                    height: 100%;
+
+                    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                &:hover {
+                    z-index: 9;
+                    color: #ffffff;
+
+                    &:after {
+                        width: 100%;
+                        background: rgba(109, 130, 189, 0.911);
+                    }
+                }
             }
         }
     }
