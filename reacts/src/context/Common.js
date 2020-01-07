@@ -1,10 +1,11 @@
 import React, { useState, createContext } from "react";
 import { Header } from "../components";
+import message from "../lib/img/envelope.png";
 
 const Context = createContext(null);
 
 const CommonContext = props => {
-    const { username, postLogout, history } = props;
+    const { username, postLogout, history, error_message, error } = props;
 
     const [formMode, setFormMode] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,25 @@ const CommonContext = props => {
     };
     const [side_menu_toggle, setSideToggle] = useState(true);
     const [side_menu_icon_toggle, setSideIconToggle] = useState(true);
+    const [errorToggle, setErrorToggle] = useState(true);
+
+    //error 명칭: notify
+    const ErrorBox = () => {
+        return (
+            <div className="error error-top-right">
+                <a onClick={() => setErrorToggle(false)}>x</a>
+                <div className="error-icon">
+                    <div className="error-icon-inner">
+                        <img src={message} alt="message" />
+                    </div>
+                </div>
+                <div className="error-text">
+                    <h3>Error</h3>
+                    <p>{error_message}</p>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <Context.Provider
@@ -55,6 +75,7 @@ const CommonContext = props => {
                 postLogout={postLogout}
                 history={history}
             />
+            {error ? errorToggle ? <ErrorBox /> : null : null}
             {props.children}
         </Context.Provider>
     );

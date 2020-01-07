@@ -26,7 +26,7 @@ function* getListSaga(action) {
 }
 
 export function* watchList() {
-    yield takeLatest(getList, getListSaga);
+    yield takeLatest(GET_LIST, getListSaga);
 }
 
 const POST_WRITE = "post/POST_WRITE";
@@ -131,30 +131,27 @@ export function* watchLike() {
 }
 
 const initialState = {
-    list: {
-        status: "INIT",
-        postList: [],
-        error: ""
-    },
+    postList: [],
     status: "INIT",
-    error: ""
+    error_message: "",
+    error: false
 };
 
 const post = handleActions(
     {
         [GET_LIST_SUCCESS]: (state, action) => ({
             ...state,
-            list: {
-                status: "GET_LIST_SUCCESS",
-                postList: action.payload.data.list
-            }
+
+            status: "GET_LIST_SUCCESS",
+            postList: action.payload.data.list,
+            error_message: "",
+            error: false
         }),
         [GET_LIST_FAILURE]: (state, action) => ({
             ...state,
-            list: {
-                status: "GET_LIST_FAILURE",
-                error: "서버 오류"
-            }
+            status: "GET_LIST_FAILURE",
+            error_message: "서버 오류",
+            error: true
         }),
         [POST_WRITE_SUCCESS]: (state, action) => ({
             ...state,
@@ -185,12 +182,15 @@ const post = handleActions(
         }),
         [POST_LIKE_SUCCESS]: (state, action) => ({
             ...state,
-            status: "POST_LIKE_SUCCESS"
+            status: "POST_LIKE_SUCCESS",
+            error_message: "",
+            error: false
         }),
         [POST_LIKE_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_LIKE_FAILURE",
-            error: action.payload.response.data.error
+            error_message: action.payload.response.data.error,
+            error: true
         })
     },
     initialState

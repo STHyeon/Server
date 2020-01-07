@@ -32,6 +32,10 @@ $small_phone: "only screen and (max-width: 321px)";
             }
         }
     }
+
+    .authError {
+        font-size: 19px;
+    }
 }
 
 @media #{$desktop} {
@@ -195,7 +199,7 @@ $small_phone: "only screen and (max-width: 321px)";
                 float: unset;
                 width: auto;
                 height: auto;
-                padding: 75px 47px;
+                padding: 26px 47px;
             }
         }
     }
@@ -265,6 +269,11 @@ $small_phone: "only screen and (max-width: 321px)";
                 padding: 74px 16px;
             }
         }
+    }
+
+    .authError {
+        padding: 19px;
+        font-size: 16px;
     }
 }
 

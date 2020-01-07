@@ -44,8 +44,6 @@ const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike }) =>
         cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
     }
 
-    console.log(detailData);
-
     const sideToggle = () => {
         if (!side_menu_icon_toggle) {
             setSideToggle(!side_menu_toggle);
@@ -54,50 +52,52 @@ const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike }) =>
     };
 
     return (
-        <div onClick={sideToggle}>
-            {detailToggle ? (
-                formMode ? (
-                    <Detail
-                        data={detailData}
-                        onDelete={onDelete}
-                        setDetailToggle={setDetailToggle}
-                        setIsOpen={setIsOpen}
-                        setFormMode={setFormMode}
-                        setWriteToggle={setWriteToggle}
-                        onLike={onLike}
-                        username={username}
-                    />
-                ) : null
-            ) : null}
+        <div>
+            <div onClick={sideToggle}>
+                {detailToggle ? (
+                    formMode ? (
+                        <Detail
+                            data={detailData}
+                            onDelete={onDelete}
+                            setDetailToggle={setDetailToggle}
+                            setIsOpen={setIsOpen}
+                            setFormMode={setFormMode}
+                            setWriteToggle={setWriteToggle}
+                            onLike={onLike}
+                            username={username}
+                        />
+                    ) : null
+                ) : null}
 
-            {writeToggle ? (
-                <Form
-                    onPost={onPost}
-                    setWriteToggle={setWriteToggle}
-                    setIsOpen={setIsOpen}
-                    username={username}
-                    formMode={formMode}
-                    setFormMode={setFormMode}
-                    data={detailData}
-                    onModify={onModify}
-                    setDetailToggle={setDetailToggle}
-                />
-            ) : null}
-            <section className="section1">
-                <div className="inner">
-                    <div className="backImg">
-                        <div className="wrap_text">
-                            <div className="wrap_text_box">
-                                <p className="text1">오늘의 기분은 어떠신가요?</p>
-                                <p className="text2">글로써 삶의 길을 살아가요</p>
+                {writeToggle ? (
+                    <Form
+                        onPost={onPost}
+                        setWriteToggle={setWriteToggle}
+                        setIsOpen={setIsOpen}
+                        username={username}
+                        formMode={formMode}
+                        setFormMode={setFormMode}
+                        data={detailData}
+                        onModify={onModify}
+                        setDetailToggle={setDetailToggle}
+                    />
+                ) : null}
+                <section className="section1">
+                    <div className="inner">
+                        <div className="backImg">
+                            <div className="wrap_text">
+                                <div className="wrap_text_box">
+                                    <p className="text1">오늘의 기분은 어떠신가요?</p>
+                                    <p className="text2">글로써 삶의 길을 살아가요</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section className="section2">
-                <div className="inner">{cardMap}</div>
-            </section>
+                </section>
+                <section className="section2">
+                    <div className="inner">{cardMap}</div>
+                </section>
+            </div>
         </div>
     );
 };

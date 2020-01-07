@@ -6,7 +6,7 @@ import { postLogout } from "../modules/auth";
 import { getList, postWrite, postDelete, postModify, postLike } from "../modules/post";
 import { connect } from "react-redux";
 
-function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history, postModify, postLike }) {
+function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history, postModify, postLike, error_message, error }) {
     const onPost = formData => {
         postWrite(formData);
         getList();
@@ -26,14 +26,16 @@ function App({ getList, postWrite, postList, postDelete, username, isLogin, post
 
     const onLike = (userID, postID) => {
         postLike({ userID, postID });
-        setTimeout(() => {
-            getList();
-        }, 1000);
+        if (!error) {
+            // setTimeout(() => {
+            //     getList();
+            // }, 1000);
+        }
     };
 
     return (
         <div className="wrap">
-            <CommonContext username={username} isLogin={isLogin} postLogout={postLogout} history={history}>
+            <CommonContext username={username} isLogin={isLogin} postLogout={postLogout} history={history} error_message={error_message} error={error}>
                 <Main data={postList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} onModify={onModify} onLike={onLike} />
             </CommonContext>
         </div>
@@ -42,7 +44,9 @@ function App({ getList, postWrite, postList, postDelete, username, isLogin, post
 
 export default connect(
     ({ post, auth }) => ({
-        postList: post.list.postList,
+        postList: post.postList,
+        error_message: post.error_message,
+        error: post.error,
         username: auth.auth.username,
         isLogin: auth.auth.isLogin
     }),

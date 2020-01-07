@@ -35,3 +35,84 @@ body {
 .display_none {
     display: none;
 }
+
+.error {
+    position: fixed;
+    min-width: 350px;
+    max-width: 450px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #dedede;
+
+    background: #F77975;
+    color: #fff;
+    border-color: #CD4945;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px;
+    z-index: 9999;
+
+    a {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        top: -10px;
+        cursor: pointer;
+        padding: 0px 5px;
+        border-radius: 50%;
+        background-color: rgba(44, 46, 47, .9);
+        border: 1px solid #333;
+        border-color: #CD4945;
+    }
+
+    .error-icon {
+        float: left;
+        position: absolute;
+        width: 50px;
+        height: 58px;
+        border-right: 1px solid #ddd;
+        text-align: center;
+        overflow: hidden;
+        border-color: #CD4945;
+
+        .error-icon-inner {
+            position: relative;
+            top: 50%;
+            margin-top: -9px;
+
+            img {
+                max-width: 18px;
+                max-height: 18px;
+                margin: auto;
+            }
+        }
+    }
+
+    .error-text {
+        padding: 10px 15px;
+        margin-left: 50px;
+
+        h3 {
+            display: block;
+            padding: 0;
+            margin: 3px 0;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: normal;
+        }
+
+        p {
+            margin: 5px 0;
+            margin-bottom: 0;
+            padding: 0;
+            font-size: 12px;
+            font-weight: normal;
+            line-height: 14px;
+        }
+    }
+}
+
+.error-top-right {
+    top: 100px;
+    right: 20px;
+}

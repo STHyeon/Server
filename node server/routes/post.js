@@ -134,7 +134,7 @@ router.post("/modify", upload.single("img"), function(req, res) {
 });
 
 router.post("/like", function(req, res) {
-    if (req.body.userID < 1) {
+    if (req.body.userID < 1 || req.body.userID == null) {
         return res.status(403).json({
             error: "로그인이 필요합니다."
         });
