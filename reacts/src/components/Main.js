@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
 import { Detail, Form } from "../components";
 
-const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike }) => {
+const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike, onComments }) => {
     const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle, setSideToggle, setSideIconToggle, side_menu_icon_toggle, side_menu_toggle, formMode, setFormMode } = useContext(
         Context
     );
@@ -65,6 +65,7 @@ const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike }) =>
                             setWriteToggle={setWriteToggle}
                             onLike={onLike}
                             username={username}
+                            onComments={onComments}
                         />
                     ) : null
                 ) : null}

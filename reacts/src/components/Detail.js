@@ -10,6 +10,7 @@ const Detail = props => {
     const [likeState, setLikeState] = useState(false);
     const [userCheck] = useState(props.username ? true : false);
     const [likeCount] = useState(props.data.dataList.likes ? props.data.dataList.likes.length : 0);
+    const [comments_text, setComments_Text] = useState("");
 
     useEffect(() => {
         for (const i in props.data.dataList.likes) {
@@ -18,6 +19,24 @@ const Detail = props => {
             }
         }
     }, [props]);
+
+    const handleComments = () => {
+        props.onComments(props.username, props.data.dataList._id, comments_text);
+        setComments_Text("");
+    };
+
+    const Comment_box = props => {
+        return (
+            <div>
+                <span>
+                    <img src={avatar} alt="avatar" />
+                </span>
+                <p>{props.commentsList.comment}</p>
+            </div>
+        );
+    };
+
+    const comment_map = props.data.dataList.comments.map((comment_list, index) => <Comment_box key={index} commentsList={comment_list} />);
 
     return (
         <div className="detail">
@@ -83,26 +102,14 @@ const Detail = props => {
                         </div>
                     </div>
                     <div className="detail_comments_box">
-                        <div className="detail_comments_content">
-                            <div>
-                                <span>
-                                    <img src={avatar} alt="avatar" />
-                                </span>
-                                <p>aaaaaaa</p>
-                            </div>
-                            <div>
-                                <span>
-                                    <img src={avatar} alt="avatar" />
-                                </span>
-                                <p>aaaaaaa</p>
-                            </div>
-                        </div>
+                        <div className="detail_comments_content">{comment_map}</div>
                     </div>
                 </div>
                 <div className="detail_comments_input">
                     <div className="detail_comments_wrapper">
                         <img src={avatar} alt="avatar" />
-                        <input type="text" placeholder="댓글을 입력해주세요." />
+                        <input type="text" placeholder="댓글을 입력해주세요." value={comments_text} onChange={({ target: { value } }) => setComments_Text(value)} />
+                        <button onClick={handleComments}>보내기</button>
                     </div>
                 </div>
             </div>

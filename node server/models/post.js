@@ -8,7 +8,8 @@ const postSchema = new mongoose.Schema({
     origin: { type: String },
     img_num: { type: Number },
     img_text: { type: String },
-    likes: [String]
+    likes: [String],
+    comments: [{ writer: String, comment: String }]
 });
 
 module.exports = mongoose.model("post", postSchema);

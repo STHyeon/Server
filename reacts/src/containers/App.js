@@ -3,10 +3,10 @@ import { CommonContext } from "../context/Common";
 import { Main } from "../components";
 
 import { postLogout } from "../modules/auth";
-import { getList, postWrite, postDelete, postModify, postLike } from "../modules/post";
+import { getList, postWrite, postDelete, postModify, postLike, postComment } from "../modules/post";
 import { connect } from "react-redux";
 
-function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history, postModify, postLike, error_message, error }) {
+function App({ getList, postWrite, postList, postDelete, username, isLogin, postLogout, history, postModify, postLike, error_message, error, postComment }) {
     const onPost = formData => {
         postWrite(formData);
         getList();
@@ -26,17 +26,22 @@ function App({ getList, postWrite, postList, postDelete, username, isLogin, post
 
     const onLike = (userID, postID) => {
         postLike({ userID, postID });
-        if (!error) {
-            // setTimeout(() => {
-            //     getList();
-            // }, 1000);
-        }
+        setTimeout(() => {
+            getList();
+        }, 1500);
+    };
+
+    const onComments = (userID, postID, comments_text) => {
+        postComment({ userID, postID, comments_text });
+        setTimeout(() => {
+            getList();
+        }, 1500);
     };
 
     return (
         <div className="wrap">
             <CommonContext username={username} isLogin={isLogin} postLogout={postLogout} history={history} error_message={error_message} error={error}>
-                <Main data={postList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} onModify={onModify} onLike={onLike} />
+                <Main data={postList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} onModify={onModify} onLike={onLike} onComments={onComments} />
             </CommonContext>
         </div>
     );
@@ -56,6 +61,7 @@ export default connect(
         postLogout,
         postDelete,
         postModify,
-        postLike
+        postLike,
+        postComment
     }
 )(App);

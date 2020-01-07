@@ -55,6 +55,11 @@
             padding: 20px 0;
         }
 
+        .detail_comments_box {
+            overflow: scroll;
+            max-height: 190px;
+        }
+
         .detail_star {
             width: 100%;
 
@@ -138,10 +143,14 @@
 
                 input {
                     vertical-align: top;
-                    float: right;
-                    width: 80%;
+                    width: 75%;
+                    margin-left: 11px;
                     padding: 5px;
                     border-radius: 15px;
+                }
+
+                button {
+                    float: right;
                 }
 
                 &::after {

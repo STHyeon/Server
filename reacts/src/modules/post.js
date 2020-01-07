@@ -130,6 +130,31 @@ export function* watchLike() {
     yield takeLatest(POST_LIKE, postLikeSaga);
 }
 
+const POST_COMMENTS = "POST_COMMENTS";
+const POST_COMMENTS_SUCCESS = "POST_COMMENTS_SUCCESS";
+const POST_COMMENTS_FAILURE = "POST_COMMENTS_FAILURE";
+
+export const postComment = createAction(POST_COMMENTS, ({ userID, postID, comments_text }) => ({ userID, postID, comments_text }));
+
+export function* postCommentSaga(action) {
+    try {
+        const resCOMMENTS = yield call(api.apiComment, action.payload);
+        yield put({
+            type: POST_COMMENTS_SUCCESS,
+            payload: resCOMMENTS
+        });
+    } catch (err) {
+        yield put({
+            type: POST_COMMENTS_FAILURE,
+            payload: err
+        });
+    }
+}
+
+export function* watchComment() {
+    yield takeLatest(POST_COMMENTS, postCommentSaga);
+}
+
 const initialState = {
     postList: [],
     status: "INIT",
@@ -141,7 +166,6 @@ const post = handleActions(
     {
         [GET_LIST_SUCCESS]: (state, action) => ({
             ...state,
-
             status: "GET_LIST_SUCCESS",
             postList: action.payload.data.list,
             error_message: "",
@@ -155,30 +179,39 @@ const post = handleActions(
         }),
         [POST_WRITE_SUCCESS]: (state, action) => ({
             ...state,
-            status: "POST_WRITE_SUCCESS"
+            status: "POST_WRITE_SUCCESS",
+            error_message: "",
+            error: false
         }),
         [POST_WRITE_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_WRITE_FAILURE",
-            error: action.payload.response.data.error
+            error_message: action.payload.response.data.error,
+            error: true
         }),
         [POST_DELETE_SUCCESS]: (state, action) => ({
             ...state,
-            status: "POST_DELETE_SUCCESS"
+            status: "POST_DELETE_SUCCESS",
+            error_message: "",
+            error: false
         }),
         [POST_DELETE_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_DELETE_FAILURE",
-            error: action.payload.response.data.error
+            error_message: action.payload.response.data.error,
+            error: true
         }),
         [POST_MODIFY_SUCCESS]: (state, action) => ({
             ...state,
-            status: "POST_MODIFY_SUCCESS"
+            status: "POST_MODIFY_SUCCESS",
+            error_message: "",
+            error: false
         }),
         [POST_MODIFY_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_MODIFY_FAILURE",
-            error: action.payload.response.data.error
+            error_message: action.payload.response.data.error,
+            error: true
         }),
         [POST_LIKE_SUCCESS]: (state, action) => ({
             ...state,
@@ -189,6 +222,18 @@ const post = handleActions(
         [POST_LIKE_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_LIKE_FAILURE",
+            error_message: action.payload.response.data.error,
+            error: true
+        }),
+        [POST_COMMENTS_SUCCESS]: (state, action) => ({
+            ...state,
+            status: "POST_COMMENTS_SUCCESS",
+            error_message: "",
+            error: false
+        }),
+        [POST_COMMENTS_FAILURE]: (state, action) => ({
+            ...state,
+            status: "POST_COMMENTS_FAILURE",
             error_message: action.payload.response.data.error,
             error: true
         })

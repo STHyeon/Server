@@ -40,3 +40,7 @@ export const apiModify = param => {
 export const apiLike = param => {
     return base.post("/post/like", param);
 };
+
+export const apiComment = param => {
+    return base.post("/post/comments", param);
+};

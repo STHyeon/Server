@@ -155,7 +155,41 @@ router.post("/like", function(req, res) {
             result.likes.push(req.body.userID);
         }
 
-        console.log(result.likes);
+        result.save(function(err) {
+            if (err) throw err;
+            return res.status(200).json({
+                success: true
+            });
+        });
+    });
+});
+
+router.post("/comments", function(req, res) {
+    if (req.body.userID < 1 || req.body.userID == null) {
+        return res.status(403).json({
+            error: "로그인이 필요합니다."
+        });
+    }
+
+    if (req.body.comments_text < 1 || req.body.comments_text == null) {
+        return res.status(404).json({
+            error: "빈칸을 채워주세요."
+        });
+    }
+
+    Post.findOne({ _id: req.body.postID }, (err, result) => {
+        if (err) throw err;
+
+        if (!result) {
+            return res.status(404).json({
+                error: "데이터가 없습니다."
+            });
+        }
+
+        result.comments.push({
+            writer: req.body.userID,
+            comment: req.body.comments_text
+        });
 
         result.save(function(err) {
             if (err) throw err;
