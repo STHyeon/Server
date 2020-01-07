@@ -2,16 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Common";
 import { Detail, Form } from "../components";
 
-const Main = ({ data, onList, onPost, username, onDelete, onModify }) => {
+const Main = ({ data, onList, onPost, username, onDelete, onModify, onLike }) => {
     const { writeToggle, setIsOpen, detailToggle, setDetailToggle, setWriteToggle, setSideToggle, setSideIconToggle, side_menu_icon_toggle, side_menu_toggle, formMode, setFormMode } = useContext(
         Context
     );
+
+    const [detailData, setDetailData] = useState([]);
 
     useEffect(() => {
         onList();
     }, []);
 
-    const [detailData, setDetailData] = useState([]);
     const Card = props => {
         return (
             <div
@@ -43,6 +44,8 @@ const Main = ({ data, onList, onPost, username, onDelete, onModify }) => {
         cardMap = data.map((list, index) => <Card key={index} dataList={list} />);
     }
 
+    console.log(detailData);
+
     const sideToggle = () => {
         if (!side_menu_icon_toggle) {
             setSideToggle(!side_menu_toggle);
@@ -54,11 +57,32 @@ const Main = ({ data, onList, onPost, username, onDelete, onModify }) => {
         <div onClick={sideToggle}>
             {detailToggle ? (
                 formMode ? (
-                    <Detail data={detailData} onDelete={onDelete} setDetailToggle={setDetailToggle} setIsOpen={setIsOpen} setFormMode={setFormMode} setWriteToggle={setWriteToggle} />
+                    <Detail
+                        data={detailData}
+                        onDelete={onDelete}
+                        setDetailToggle={setDetailToggle}
+                        setIsOpen={setIsOpen}
+                        setFormMode={setFormMode}
+                        setWriteToggle={setWriteToggle}
+                        onLike={onLike}
+                        username={username}
+                    />
                 ) : null
             ) : null}
 
-            {writeToggle ? <Form onPost={onPost} setWriteToggle={setWriteToggle} setIsOpen={setIsOpen} username={username} formMode={formMode} setFormMode={setFormMode} data={detailData} onModify={onModify} setDetailToggle={setDetailToggle} /> : null}
+            {writeToggle ? (
+                <Form
+                    onPost={onPost}
+                    setWriteToggle={setWriteToggle}
+                    setIsOpen={setIsOpen}
+                    username={username}
+                    formMode={formMode}
+                    setFormMode={setFormMode}
+                    data={detailData}
+                    onModify={onModify}
+                    setDetailToggle={setDetailToggle}
+                />
+            ) : null}
             <section className="section1">
                 <div className="inner">
                     <div className="backImg">

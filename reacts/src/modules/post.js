@@ -87,9 +87,7 @@ const POST_MODIFY_FAILURE = "POST_MODIFY_FAILURE";
 export const postModify = createAction(POST_MODIFY, formData => formData);
 
 export function* postModifySaga(action) {
-    console.log(action);
     const resModify = yield call(api.apiModify, action.payload);
-    console.log(resModify);
     try {
         yield put({
             type: POST_MODIFY_SUCCESS,
@@ -105,6 +103,31 @@ export function* postModifySaga(action) {
 
 export function* watchModify() {
     yield takeLatest(POST_MODIFY, postModifySaga);
+}
+
+const POST_LIKE = "POST_LIKE";
+const POST_LIKE_SUCCESS = "POST_LIKE_SUCCESS";
+const POST_LIKE_FAILURE = "POST_LIKE_FAILURE";
+
+export const postLike = createAction(POST_LIKE, ({ userID, postID }) => ({ userID, postID }));
+
+export function* postLikeSaga(action) {
+    try {
+        const resLike = yield call(api.apiLike, action.payload);
+        yield put({
+            type: POST_LIKE_SUCCESS,
+            payload: resLike
+        });
+    } catch (err) {
+        yield put({
+            type: POST_LIKE_FAILURE,
+            payload: err
+        });
+    }
+}
+
+export function* watchLike() {
+    yield takeLatest(POST_LIKE, postLikeSaga);
 }
 
 const initialState = {
@@ -158,6 +181,15 @@ const post = handleActions(
         [POST_MODIFY_FAILURE]: (state, action) => ({
             ...state,
             status: "POST_MODIFY_FAILURE",
+            error: action.payload.response.data.error
+        }),
+        [POST_LIKE_SUCCESS]: (state, action) => ({
+            ...state,
+            status: "POST_LIKE_SUCCESS"
+        }),
+        [POST_LIKE_FAILURE]: (state, action) => ({
+            ...state,
+            status: "POST_LIKE_FAILURE",
             error: action.payload.response.data.error
         })
     },

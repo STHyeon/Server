@@ -29,6 +29,7 @@
             .optionMenu {
                 li {
                     text-align: center;
+
                     &:hover {
                         text-decoration: underline;
                     }
@@ -91,23 +92,14 @@
                     }
 
                     .like_on {
-                        display: none;
-                    }
-
-                    &:hover {
-                        .like_on {
-                            display: inline-block;
-                        }
-
-                        .like_off {
-                            display: none;
-                        }
+                        display: inline-block;
                     }
                 }
             }
         }
 
         .detail_comments_box {
+
             span,
             input,
             p {

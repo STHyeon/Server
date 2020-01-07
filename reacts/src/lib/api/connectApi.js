@@ -36,3 +36,7 @@ export const apiDelete = param => {
 export const apiModify = param => {
     return base.post("/post/modify", param);
 };
+
+export const apiLike = param => {
+    return base.post("/post/like", param);
+};

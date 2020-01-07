@@ -133,4 +133,37 @@ router.post("/modify", upload.single("img"), function(req, res) {
     });
 });
 
+router.post("/like", function(req, res) {
+    if (req.body.userID < 1) {
+        return res.status(403).json({
+            error: "로그인이 필요합니다."
+        });
+    }
+
+    Post.findOne({ _id: req.body.postID }, (err, result) => {
+        if (err) throw err;
+
+        if (!result) {
+            return res.status(404).json({
+                error: "데이터가 없습니다."
+            });
+        }
+
+        if (result.likes.indexOf(req.body.userID) != -1) {
+            result.likes.splice(result.likes.indexOf(req.body.userID), 1);
+        } else {
+            result.likes.push(req.body.userID);
+        }
+
+        console.log(result.likes);
+
+        result.save(function(err) {
+            if (err) throw err;
+            return res.status(200).json({
+                success: true
+            });
+        });
+    });
+});
+
 module.exports = router;

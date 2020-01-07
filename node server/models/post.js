@@ -7,7 +7,8 @@ const postSchema = new mongoose.Schema({
     img: { type: String },
     origin: { type: String },
     img_num: { type: Number },
-    img_text: { type: String }
+    img_text: { type: String },
+    likes: [String]
 });
 
 module.exports = mongoose.model("post", postSchema);

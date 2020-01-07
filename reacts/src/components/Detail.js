@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import avatar from "../lib/img/avatar.png";
 import menu from "../lib/img/menu.png";
 import thumb from "../lib/img/thumbs.png";
@@ -7,15 +7,17 @@ import like from "../lib/img/like.png";
 
 const Detail = props => {
     const [openMenu, setOpenMenu] = useState(false);
-    const [openAlert, setOpenAlert] = useState(false);
+    const [likeState, setLikeState] = useState(false);
+    const [userCheck] = useState(props.username ? true : false);
+    const [likeCount] = useState(props.data.dataList.likes ? props.data.dataList.likes.length : 0);
 
-    const Alert = () => {
-        return (
-            <div>
-                <p>a</p>
-            </div>
-        );
-    };
+    useEffect(() => {
+        for (const i in props.data.dataList.likes) {
+            if (props.data.dataList.likes[i] === props.username) {
+                setLikeState(true);
+            }
+        }
+    }, [props]);
 
     return (
         <div className="detail">
@@ -63,10 +65,14 @@ const Detail = props => {
                     </div>
                     <div className="detail_star">
                         <div className="detail_contents_box">
-                            <p>
-                                <img src={thumb} alt="good" className="like_off" />
-                                <img src={like} alt="like" className="like_on" />
-                                <span>315</span>
+                            <p
+                                onClick={() => {
+                                    props.onLike(props.username, props.data.dataList._id);
+                                    userCheck ? setLikeState(!likeState) : setLikeState(false);
+                                }}
+                            >
+                                {likeState ? <img src={like} alt="like" className="like_on" /> : <img src={thumb} alt="good" className="like_on" />}
+                                <span>{likeCount}</span>
                             </p>
                         </div>
                         <div className="detail_contents_box">
