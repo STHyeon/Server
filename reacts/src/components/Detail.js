@@ -9,7 +9,7 @@ const Detail = props => {
     const [openMenu, setOpenMenu] = useState(false);
     const [likeState, setLikeState] = useState(false);
     const [userCheck] = useState(props.username ? true : false);
-    const [likeCount] = useState(props.data.dataList.likes ? props.data.dataList.likes.length : 0);
+    const [likeCount, setLikeCount] = useState(props.data.dataList.likes.length);
     const [comments_text, setComments_Text] = useState("");
 
     useEffect(() => {
@@ -18,7 +18,10 @@ const Detail = props => {
                 setLikeState(true);
             }
         }
-    }, [props]);
+        if(props.detail_data != "") {
+            setLikeCount(props.detail_data.likes.length)
+        }
+    }, [props.detail_data]);
 
     const handleComments = () => {
         props.onComments(props.username, props.data.dataList._id, comments_text);

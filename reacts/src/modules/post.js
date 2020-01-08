@@ -157,6 +157,7 @@ export function* watchComment() {
 
 const initialState = {
     postList: [],
+    postDetailList: [],
     status: "INIT",
     error_message: "",
     error: false
@@ -216,6 +217,7 @@ const post = handleActions(
         [POST_LIKE_SUCCESS]: (state, action) => ({
             ...state,
             status: "POST_LIKE_SUCCESS",
+            postDetailList: action.payload.data.success,
             error_message: "",
             error: false
         }),

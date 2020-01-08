@@ -158,7 +158,7 @@ router.post("/like", function(req, res) {
         result.save(function(err) {
             if (err) throw err;
             return res.status(200).json({
-                success: true
+                success: result
             });
         });
     });
@@ -198,6 +198,13 @@ router.post("/comments", function(req, res) {
             });
         });
     });
+});
+
+router.post("/detail", function(req, res) {
+    console.log(req.body);
+    return res.status(200).json({
+        success: true
+    })
 });
 
 module.exports = router;

@@ -7,15 +7,12 @@ const POST_REGISTER = "auth/POST_REGISTER";
 const POST_REGISTER_SUCCESS = "auth/POST_REGISTER_SUCCESS";
 const POST_REGISTER_FAILURE = "auth/POST_REGISTER_FAILURE";
 
-export const postRegister = createAction(
-    POST_REGISTER,
-    ({ username, password, password2, history }) => ({
-        username,
-        password,
-        password2,
-        history
-    })
-);
+export const postRegister = createAction(POST_REGISTER, ({ username, password, password2, history }) => ({
+    username,
+    password,
+    password2,
+    history
+}));
 
 function* postRegisterSaga(action) {
     const { history } = action.payload;
@@ -60,7 +57,7 @@ function* postLoginSaga(action) {
             type: POST_LOGIN_SUCCESS,
             payload: resLogin
         });
-        // localStorage.setItem("username", action.payload.username);
+        localStorage.setItem("username", action.payload.username);
         // localStorage.setItem("token", resLogin.data.token);
         history.push("/");
     } catch (err) {
@@ -106,7 +103,8 @@ const initialState = {
         status: "INIT",
         message: "",
         error: false,
-        username: "",
+        // username: "",
+        username: localStorage.getItem("username"),
         isLogin: "",
         token: ""
     }
@@ -118,9 +116,9 @@ const auth = handleActions(
             ...state,
             auth: {
                 status: "LOGIN_SUCCESS",
-                // username: localStorage.getItem("username"),
+                username: localStorage.getItem("username"),
                 // isLogin: localStorage.getItem("token")
-                username: action.payload.data.username,
+                // username: action.payload.data.username,
                 token: action.payload.data.token
             }
         }),
@@ -134,7 +132,7 @@ const auth = handleActions(
             }
         }),
 
-        [POST_REGISTER_FAILURE]: (state, action) => ({
+        [POST_REGISTER_SUCCESS]: (state, action) => ({
             ...state,
             auth: {
                 status: "REGISTER_SUCCESS"
