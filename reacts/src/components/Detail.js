@@ -8,18 +8,39 @@ import like from "../lib/img/like.png";
 const Detail = props => {
     const [openMenu, setOpenMenu] = useState(false);
     const [likeState, setLikeState] = useState(false);
-    const [userCheck] = useState(props.username ? true : false);
     const [likeCount, setLikeCount] = useState(props.data.dataList.likes.length);
+    const [commentsCount, setCommentsCount] = useState(props.data.dataList.comments.length);
     const [comments_text, setComments_Text] = useState("");
+    const [commentBox, setCommentBox] = useState(props.data.dataList.comments);
 
     useEffect(() => {
         for (const i in props.data.dataList.likes) {
             if (props.data.dataList.likes[i] === props.username) {
+                console.log("있다");
                 setLikeState(true);
+            } else {
+                console.log("없다");
+                setLikeState(false);
             }
         }
-        if(props.detail_data != "") {
-            setLikeCount(props.detail_data.likes.length)
+    }, []);
+
+    useEffect(() => {
+        if (props.detail_data != "") {
+            setLikeCount(props.detail_data.likes.length);
+            setCommentsCount(props.detail_data.comments.length);
+            setCommentBox(props.detail_data.comments);
+
+            for (const i in props.detail_data.likes) {
+                console.log(props.detail_data.likes);
+                if (props.detail_data.likes[i] === props.username) {
+                    console.log("디테일 있다");
+                    setLikeState(true);
+                } else {
+                    console.log("디테일 없다");
+                    setLikeState(false);
+                }
+            }
         }
     }, [props.detail_data]);
 
@@ -39,7 +60,7 @@ const Detail = props => {
         );
     };
 
-    const comment_map = props.data.dataList.comments.map((comment_list, index) => <Comment_box key={index} commentsList={comment_list} />);
+    const comment_map = commentBox.map((comment_list, index) => <Comment_box key={index} commentsList={comment_list} />);
 
     return (
         <div className="detail">
@@ -90,7 +111,6 @@ const Detail = props => {
                             <p
                                 onClick={() => {
                                     props.onLike(props.username, props.data.dataList._id);
-                                    userCheck ? setLikeState(!likeState) : setLikeState(false);
                                 }}
                             >
                                 {likeState ? <img src={like} alt="like" className="like_on" /> : <img src={thumb} alt="good" className="like_on" />}
@@ -100,7 +120,7 @@ const Detail = props => {
                         <div className="detail_contents_box">
                             <p>
                                 <img src={comment} alt="comment" />
-                                <span>33</span>
+                                <span>{commentsCount}</span>
                             </p>
                         </div>
                     </div>

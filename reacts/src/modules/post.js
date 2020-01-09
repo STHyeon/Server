@@ -230,6 +230,7 @@ const post = handleActions(
         [POST_COMMENTS_SUCCESS]: (state, action) => ({
             ...state,
             status: "POST_COMMENTS_SUCCESS",
+            postDetailList: action.payload.data.success,
             error_message: "",
             error: false
         }),

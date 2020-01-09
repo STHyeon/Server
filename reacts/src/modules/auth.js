@@ -57,7 +57,7 @@ function* postLoginSaga(action) {
             type: POST_LOGIN_SUCCESS,
             payload: resLogin
         });
-        localStorage.setItem("username", action.payload.username);
+        // localStorage.setItem("username", action.payload.username);
         // localStorage.setItem("token", resLogin.data.token);
         history.push("/");
     } catch (err) {
@@ -103,8 +103,8 @@ const initialState = {
         status: "INIT",
         message: "",
         error: false,
-        // username: "",
-        username: localStorage.getItem("username"),
+        username: "",
+        // username: localStorage.getItem("username"),
         isLogin: "",
         token: ""
     }
@@ -116,9 +116,9 @@ const auth = handleActions(
             ...state,
             auth: {
                 status: "LOGIN_SUCCESS",
-                username: localStorage.getItem("username"),
+                // username: localStorage.getItem("username"),
                 // isLogin: localStorage.getItem("token")
-                // username: action.payload.data.username,
+                username: action.payload.data.username,
                 token: action.payload.data.token
             }
         }),
