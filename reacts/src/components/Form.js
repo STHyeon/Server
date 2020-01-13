@@ -56,14 +56,11 @@ const Form = props => {
 
     const handlePost = e => {
         e.preventDefault();
-        // Capture();
-        // setTimeout(function() {
         postSelect(formData);
         props.setFormMode(true);
         props.setDetailToggle(false);
         props.setWriteToggle(false);
         props.setIsOpen(false);
-        // }, 3000);
     };
 
     return (

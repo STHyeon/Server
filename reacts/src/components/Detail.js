@@ -49,7 +49,7 @@ const Detail = props => {
         setComments_Text("");
     };
 
-    const Comment_box = props => {
+    const CommentBoxes = props => {
         return (
             <div>
                 <span>
@@ -60,7 +60,7 @@ const Detail = props => {
         );
     };
 
-    const comment_map = commentBox.map((comment_list, index) => <Comment_box key={index} commentsList={comment_list} />);
+    const comment_map = commentBox.map((comment_list, index) => <CommentBoxes key={index} commentsList={comment_list} />);
 
     return (
         <div className="detail">

@@ -150,7 +150,14 @@ $small_phone: "only screen and (max-width: 321px)";
         }
 
         .detail_content {
+            position: static;
             padding: initial;
+
+            .detail_wraper {
+                .detail_comments_box_d {
+                    display: block;
+                }
+            }
 
             .detail_person,
             .detail_comments_box {
@@ -275,6 +282,18 @@ $small_phone: "only screen and (max-width: 321px)";
         padding: 19px;
         font-size: 16px;
     }
+
+    .detail {
+        .detail_content {
+            .detail_comments_input {
+                .detail_comments_wrapper {
+                    input {
+                        width: 66%;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media #{$small_phone} {
@@ -287,6 +306,17 @@ $small_phone: "only screen and (max-width: 321px)";
 
         .write_text_box {
             position: static;
+        }
+    }
+    .detail {
+        .detail_content {
+            .detail_comments_input {
+                .detail_comments_wrapper {
+                    input {
+                        width: 57%;
+                    }
+                }
+            }
         }
     }
 }

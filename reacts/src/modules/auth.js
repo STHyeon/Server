@@ -42,7 +42,6 @@ const POST_LOGIN = "auth/POST_LOGIN";
 const POST_LOGIN_SUCCESS = "auth/POST_LOGIN_SUCCESS";
 const POST_LOGIN_FAILURE = "auth/POST_LOGIN_FAILURE";
 
-//export const postRegister = text => ({ type: POST_REGISTER, payload: text })
 export const postLogin = createAction(POST_LOGIN, ({ username, password, history }) => ({
     username,
     password,
@@ -57,8 +56,6 @@ function* postLoginSaga(action) {
             type: POST_LOGIN_SUCCESS,
             payload: resLogin
         });
-        // localStorage.setItem("username", action.payload.username);
-        // localStorage.setItem("token", resLogin.data.token);
         history.push("/");
     } catch (err) {
         yield put({
@@ -104,7 +101,6 @@ const initialState = {
         message: "",
         error: false,
         username: "",
-        // username: localStorage.getItem("username"),
         isLogin: "",
         token: ""
     }
@@ -116,8 +112,6 @@ const auth = handleActions(
             ...state,
             auth: {
                 status: "LOGIN_SUCCESS",
-                // username: localStorage.getItem("username"),
-                // isLogin: localStorage.getItem("token")
                 username: action.payload.data.username,
                 token: action.payload.data.token
             }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CommonContext } from "../context/Common";
 import { Main } from "../components";
 
@@ -41,7 +41,17 @@ function App({ getList, postWrite, postList, postDetailList, postDelete, usernam
     return (
         <div className="wrap">
             <CommonContext username={username} isLogin={isLogin} postLogout={postLogout} history={history} error_message={error_message} error={error}>
-                <Main data={postList} detail_data={postDetailList} onList={getList} onPost={onPost} username={username} onDelete={onDelete} onModify={onModify} onLike={onLike} onComments={onComments} />
+                <Main
+                    data={postList}
+                    detail_data={postDetailList}
+                    onList={getList}
+                    onPost={onPost}
+                    username={username}
+                    onDelete={onDelete}
+                    onModify={onModify}
+                    onLike={onLike}
+                    onComments={onComments}
+                />
             </CommonContext>
         </div>
     );
@@ -63,6 +73,6 @@ export default connect(
         postDelete,
         postModify,
         postLike,
-        postComment,
+        postComment
     }
 )(App);

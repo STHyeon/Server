@@ -23,7 +23,7 @@ const CommonContext = props => {
     const ErrorBox = () => {
         return (
             <div className="error error-top-right">
-                <a onClick={() => setErrorToggle(false)}>x</a>
+                <span onClick={() => setErrorToggle(false)}>x</span>
                 <div className="error-icon">
                     <div className="error-icon-inner">
                         <img src={message} alt="message" />

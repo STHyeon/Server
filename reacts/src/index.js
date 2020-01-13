@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.scss";
-import { App, Login, Register, Test1 } from "./containers";
+import { App, Login, Register } from "./containers";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
@@ -16,10 +16,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(logger, sagaMiddleware))
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
 
@@ -29,7 +26,6 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/test" component={Test1} />
         </Router>
     </Provider>,
     document.getElementById("root")

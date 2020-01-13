@@ -23,31 +23,13 @@ const Auth = props => {
                         <div className="login_contain">
                             <h1>로그인</h1>
                             <div className="login_box">
-                                <input
-                                    type="text"
-                                    className="login_input"
-                                    name="username"
-                                    placeholder="아이디"
-                                    value={username}
-                                    onChange={({ target: { value } }) => setUsername(value)}
-                                />
+                                <input type="text" className="login_input" name="username" placeholder="아이디" value={username} onChange={({ target: { value } }) => setUsername(value)} />
 
-                                <input
-                                    type="password"
-                                    className="login_input"
-                                    name="password"
-                                    placeholder="비밀번호"
-                                    value={password}
-                                    onChange={({ target: { value } }) => setPassword(value)}
-                                />
+                                <input type="password" className="login_input" name="password" placeholder="비밀번호" value={password} onChange={({ target: { value } }) => setPassword(value)} />
                                 <button className="login_button" onClick={handleLogin}>
                                     로그인
                                 </button>
-                                {props.authError ? (
-                                    <p className="authError">{props.authError}</p>
-                                ) : (
-                                    ""
-                                )}
+                                {props.authError ? <p className="authError">{props.authError}</p> : ""}
                             </div>
                         </div>
                     </div>
@@ -70,29 +52,10 @@ const Auth = props => {
                     <div className="brown">
                         <div className="input_box">
                             <h1 className="text1">회원가입</h1>
-                            <input
-                                type="text"
-                                className="register_input"
-                                placeholder="아이디"
-                                onChange={({ target: { value } }) => setUsername(value)}
-                            />
-                            <input
-                                type="password"
-                                className="register_input"
-                                placeholder="비밀번호"
-                                onChange={({ target: { value } }) => setPassword(value)}
-                            />
-                            <input
-                                type="password"
-                                className="register_input"
-                                placeholder="비밀번호 확인"
-                                onChange={({ target: { value } }) => setPassword2(value)}
-                            />
-                            <button
-                                type="submit"
-                                className="register_button"
-                                onClick={handleRegister}
-                            >
+                            <input type="text" className="register_input" placeholder="아이디" value={username} onChange={({ target: { value } }) => setUsername(value)} />
+                            <input type="password" className="register_input" placeholder="비밀번호" value={password} onChange={({ target: { value } }) => setPassword(value)} />
+                            <input type="password" className="register_input" placeholder="비밀번호 확인" value={password2} onChange={({ target: { value } }) => setPassword2(value)} />
+                            <button type="submit" className="register_button" onClick={handleRegister}>
                                 회원가입
                             </button>
                             {props.authError ? <p className="authError">{props.authError}</p> : ""}

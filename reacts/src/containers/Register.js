@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Auth } from "../components";
 import { CommonContext } from "../context/Common";
 
@@ -6,15 +6,13 @@ import { connect } from "react-redux";
 import { postRegister } from "../modules/auth";
 
 const Register = ({ history, authError, postRegister }) => {
-    const [mode] = useState(false);
-
     const onRegister = ({ username, password, password2 }) => {
         postRegister({ username, password, password2, history });
     };
 
     return (
         <CommonContext>
-            <Auth mode={mode} onRegister={onRegister} authError={authError} />
+            <Auth mode={false} onRegister={onRegister} authError={authError} />
         </CommonContext>
     );
 };
