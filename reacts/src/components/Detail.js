@@ -16,10 +16,8 @@ const Detail = props => {
     useEffect(() => {
         for (const i in props.data.dataList.likes) {
             if (props.data.dataList.likes[i] === props.username) {
-                console.log("있다");
                 setLikeState(true);
             } else {
-                console.log("없다");
                 setLikeState(false);
             }
         }
@@ -32,12 +30,9 @@ const Detail = props => {
             setCommentBox(props.detail_data.comments);
 
             for (const i in props.detail_data.likes) {
-                console.log(props.detail_data.likes);
                 if (props.detail_data.likes[i] === props.username) {
-                    console.log("디테일 있다");
                     setLikeState(true);
                 } else {
-                    console.log("디테일 없다");
                     setLikeState(false);
                 }
             }
