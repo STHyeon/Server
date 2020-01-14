@@ -106,6 +106,7 @@ const Detail = props => {
                             <p
                                 onClick={() => {
                                     props.onLike(props.username, props.data.dataList._id);
+                                    setLikeState(!likeState);
                                 }}
                             >
                                 {likeState ? <img src={like} alt="like" className="like_on" /> : <img src={thumb} alt="good" className="like_on" />}

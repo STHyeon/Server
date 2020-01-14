@@ -101,7 +101,7 @@ const Form = props => {
                             onKeyDown={handleTextArea}
                         ></textarea>
                         <button type="button" onClick={Capture}>
-                            <span>임시 캡쳐</span>
+                            <span>캡쳐</span>
                         </button>
                         <button type="submit">올리기</button>
                     </div>
