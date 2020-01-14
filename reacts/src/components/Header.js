@@ -15,6 +15,8 @@ const Header = props => {
     const side_menu_icon = props.side_menu_toggle ? "open_menu" : "display_none";
     const side_menu_icon2 = props.side_menu_icon_toggle ? "display_none" : "open_menu";
 
+    const executeScroll = () => window.scrollTo(0, 0);
+
     return (
         <div>
             <nav className="nav">
@@ -31,7 +33,18 @@ const Header = props => {
                     <div className={side_menu_class}>
                         <div></div>
                         <ul>
-                            <li>{username ? <span onClick={props.onToggle}>WRITE</span> : null}</li>
+                            <li>
+                                {username ? (
+                                    <span
+                                        onClick={() => {
+                                            props.onToggle();
+                                            executeScroll();
+                                        }}
+                                    >
+                                        WRITE
+                                    </span>
+                                ) : null}
+                            </li>
                             {username ? (
                                 <div>
                                     <li>

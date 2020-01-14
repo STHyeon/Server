@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { Header } from "../components";
 import message from "../lib/img/envelope.png";
 
@@ -36,6 +36,10 @@ const CommonContext = props => {
             </div>
         );
     };
+
+    useEffect(() => {
+        isOpen ? (document.body.style.overflowY = "hidden") : (document.body.style.overflowY = "unset");
+    }, [isOpen]);
 
     return (
         <Context.Provider
