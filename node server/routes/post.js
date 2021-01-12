@@ -7,6 +7,14 @@ var path = require('path');
 function decode_base64(base64str, filename) {
     let buf = Buffer.from(base64str, 'base64');
 
+    var saveFolder = path.join(__dirname, '../public/');
+
+    if (!fs.existsSync(saveFolder)) {
+        fs.mkdirSync(saveFolder);
+    }
+
+    console.log('파일');
+
     fs.writeFile(path.join(__dirname, '../public/', filename), buf, function (error) {
         // console.log(buf);
         if (error) {
