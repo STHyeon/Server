@@ -1,13 +1,13 @@
-const router = require("express").Router();
-const Post = require("../models/post");
-const multer = require("multer");
-const fs = require("fs");
-var path = require("path");
+const router = require('express').Router();
+const Post = require('../models/post');
+const multer = require('multer');
+const fs = require('fs');
+var path = require('path');
 
 function decode_base64(base64str, filename) {
-    let buf = Buffer.from(base64str, "base64");
+    let buf = Buffer.from(base64str, 'base64');
 
-    fs.writeFile(path.join(__dirname, "../public/", filename), buf, function(error) {
+    fs.writeFile(path.join(__dirname, '../public/', filename), buf, function (error) {
         // console.log(buf);
         if (error) {
             throw error;
@@ -19,24 +19,26 @@ function decode_base64(base64str, filename) {
 }
 
 let upload = multer({
+    limits: { fieldSize: 2 * 1024 * 1024 },
     fileFilter: (req, file, callback) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        if (file.mimetype == 'image/png' || file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg') {
             callback(null, true);
         } else {
-            return callback(new Error("only.png, .jpg, .jpeg"));
+            return callback(new Error('only.png, .jpg, .jpeg'));
         }
     }
 });
 
-router.get("/list", function(req, res) {
+router.get('/list', function (req, res) {
     Post.find({}, (err, list) => {
         if (err) throw err;
 
         for (const i in list) {
-            const ai = path.join(__dirname, "../public/", list[i].img);
+            const ai = path.join(__dirname, '../public/', list[i].img);
             let buf = fs.readFileSync(ai);
-            let base64data = buf.toString("base64");
-            list[i].img = "data:image/png;base64," + base64data;
+            console.log(buf);
+            let base64data = buf.toString('base64');
+            list[i].img = 'data:image/png;base64,' + base64data;
         }
 
         return res.json({
@@ -45,16 +47,16 @@ router.get("/list", function(req, res) {
     });
 });
 
-router.post("/post", upload.single("img"), function(req, res) {
+router.post('/post', upload.single('img'), function (req, res) {
     if (req.body.author < 1 || req.body.content < 1) {
         return res.status(400).json({
-            error: "로그인이 되어 있지않거나 빈칸이 있습니다."
+            error: '로그인이 되어 있지않거나 빈칸이 있습니다.'
         });
     }
 
     let data = req.body.img;
-    data = data.replace(/data:image\/png;base64,/, "");
-    const file_name = Date.now() + " - " + req.body.username + ".png";
+    data = data.replace(/data:image\/png;base64,/, '');
+    const file_name = Date.now() + ' - ' + req.body.username + '.png';
     //base64 String, "파일 이름"
     decode_base64(data, file_name);
     let postCreate = new Post({
@@ -66,23 +68,23 @@ router.post("/post", upload.single("img"), function(req, res) {
         img_text: req.body.img_text
     });
 
-    postCreate.save(err => {
+    postCreate.save((err) => {
         if (err) throw err;
         return res.json({ success: postCreate });
     });
 });
 
-router.post("/delete", function(req, res) {
-    Post.deleteOne({ origin: req.body.imgId }, function(err, result) {
+router.post('/delete', function (req, res) {
+    Post.deleteOne({ origin: req.body.imgId }, function (err, result) {
         if (err) throw err;
         if (!result) {
             return res.status(404).json({
-                error: "데이터가 없음"
+                error: '데이터가 없음'
             });
         }
 
         //파일 삭제
-        const imgPath = path.join(__dirname, "../public/", req.body.imgId);
+        const imgPath = path.join(__dirname, '../public/', req.body.imgId);
 
         try {
             fs.unlinkSync(imgPath);
@@ -96,22 +98,22 @@ router.post("/delete", function(req, res) {
     });
 });
 
-router.post("/modify", upload.single("img"), function(req, res) {
+router.post('/modify', upload.single('img'), function (req, res) {
     Post.findOne({ _id: req.body.id }, (err, result) => {
         if (err) throw err;
         if (!result) {
             return res.status(404).json({
-                error: "데이터가 없습니다."
+                error: '데이터가 없습니다.'
             });
         }
 
         let data = req.body.img;
-        data = data.replace(/data:image\/png;base64,/, "");
-        const file_name = Date.now() + " - " + req.body.username + ".png";
+        data = data.replace(/data:image\/png;base64,/, '');
+        const file_name = Date.now() + ' - ' + req.body.username + '.png';
         //base64 String, "파일 이름"
         decode_base64(data, file_name);
 
-        const imgPath = path.join(__dirname, "../public/", result.origin);
+        const imgPath = path.join(__dirname, '../public/', result.origin);
 
         try {
             fs.unlinkSync(imgPath);
@@ -124,7 +126,7 @@ router.post("/modify", upload.single("img"), function(req, res) {
         result.origin = file_name;
         result.img_text = req.body.img_text;
 
-        result.save(function(err) {
+        result.save(function (err) {
             if (err) throw err;
             return res.status(200).json({
                 success: true
@@ -133,10 +135,10 @@ router.post("/modify", upload.single("img"), function(req, res) {
     });
 });
 
-router.post("/like", function(req, res) {
+router.post('/like', function (req, res) {
     if (req.body.userID < 1 || req.body.userID == null) {
         return res.status(403).json({
-            error: "로그인이 필요합니다."
+            error: '로그인이 필요합니다.'
         });
     }
 
@@ -145,7 +147,7 @@ router.post("/like", function(req, res) {
 
         if (!result) {
             return res.status(404).json({
-                error: "데이터가 없습니다."
+                error: '데이터가 없습니다.'
             });
         }
 
@@ -155,7 +157,7 @@ router.post("/like", function(req, res) {
             result.likes.push(req.body.userID);
         }
 
-        result.save(function(err) {
+        result.save(function (err) {
             if (err) throw err;
             return res.status(200).json({
                 success: result
@@ -164,16 +166,16 @@ router.post("/like", function(req, res) {
     });
 });
 
-router.post("/comments", function(req, res) {
+router.post('/comments', function (req, res) {
     if (req.body.userID < 1 || req.body.userID == null) {
         return res.status(403).json({
-            error: "로그인이 필요합니다."
+            error: '로그인이 필요합니다.'
         });
     }
 
     if (req.body.comments_text < 1 || req.body.comments_text == null) {
         return res.status(404).json({
-            error: "빈칸을 채워주세요."
+            error: '빈칸을 채워주세요.'
         });
     }
 
@@ -182,7 +184,7 @@ router.post("/comments", function(req, res) {
 
         if (!result) {
             return res.status(404).json({
-                error: "데이터가 없습니다."
+                error: '데이터가 없습니다.'
             });
         }
 
@@ -191,7 +193,7 @@ router.post("/comments", function(req, res) {
             comment: req.body.comments_text
         });
 
-        result.save(function(err) {
+        result.save(function (err) {
             if (err) throw err;
             return res.status(200).json({
                 success: result
@@ -200,7 +202,7 @@ router.post("/comments", function(req, res) {
     });
 });
 
-router.post("/detail", function(req, res) {
+router.post('/detail', function (req, res) {
     console.log(req.body);
     return res.status(200).json({
         success: true
