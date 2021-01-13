@@ -13,8 +13,6 @@ function decode_base64(base64str, filename) {
         fs.mkdirSync(saveFolder);
     }
 
-    console.log('파일');
-
     fs.writeFile(path.join(__dirname, '../public/', filename), buf, function (error) {
         // console.log(buf);
         if (error) {
@@ -44,7 +42,6 @@ router.get('/list', function (req, res) {
         for (const i in list) {
             const ai = path.join(__dirname, '../public/', list[i].img);
             let buf = fs.readFileSync(ai);
-            console.log(buf);
             let base64data = buf.toString('base64');
             list[i].img = 'data:image/png;base64,' + base64data;
         }
