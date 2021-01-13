@@ -2,26 +2,23 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
 var path = require('path');
 
 const config = require('./config/jwt');
 
+dotenv.config();
 const port = process.env.PORT || 8080;
-const mongo_url = 'mongodb://localhost/road';
-// const mongo_url = 'mongodb+srv://root:1234@cluster0.qcp56.mongodb.net/road?retryWrites=true&w=majority';
+// const mongo_url = 'mongodb://localhost/road';
+const mongo_url = process.env.MONGODBCLOUD;
 
 //usCreateIndex, useNewUrlParser 는 오류 방지용
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise;
 mongoose
     .connect(mongo_url, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then()
+    .then(() => console.log('MongoDB connectioned'))
     .catch((e) => console.log(e));
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('MongoDB database connection succes');
-});
 
 const app = express();
 
