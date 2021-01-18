@@ -36,7 +36,6 @@
     <a href="https://github.com/STHyeon/writeroad"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/STHyeon/writeroad">View Demo</a>
   </p>
 </p>
 
@@ -136,6 +135,6 @@
 <!-- CONTACT -->
 ## Contact
 
-TaeHyeon Song (Damsom) - [Gmail](mailto:th.damsom@gmail.com)
+TaeHyeon Song (Damsom) - [Mail](mailto:toby2009@naver.com)
 
 Project Link: [https://github.com/STHyeon/writeroad](https://github.com/STHyeon/writeroad)
